@@ -13,6 +13,7 @@ class PolyglotExtensions(object):
         self.parameter = param
 
         self.directory_name = self.__get_dir_name(self.parameter)
+        self.files = {}
         
 
     def __get_dir_name(self, param):
@@ -50,7 +51,12 @@ class PolyglotExtensions(object):
                 if "." not in filename:continue
                 extension = f".{str(filename).split('.')[-1]}"
                 language = self.__determine_language(extension, content)
-                print(language)
+                
+                if language in self.files:
+                    self.files[language].append(filename)
+                else:
+                    self.files[language] = [filename]
+        return self.files
 
     def __determine_language(self, ext, content):
         for lang in content:
@@ -96,4 +102,6 @@ class Polyglot(object):
         the reuslts as an array(list)
         """
         if self.command == "init":
-            poly = PolyglotExtensions(self.parameters).find_files(self.language_yaml)
+            return PolyglotExtensions(self.parameters).find_files(self.language_yaml)
+        else:
+            raise NameError(f"Command {self.command} not found")
