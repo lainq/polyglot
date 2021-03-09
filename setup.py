@@ -20,9 +20,6 @@ setuptools.setup(
     url="https://github.com/pranavbaburaj/polyglot",
     packages=setuptools.find_packages(),
     install_requires=DEPENDENCIES,
-    entry_points={"console_scripts": [
-        
-        ]},
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
