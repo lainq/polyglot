@@ -1,4 +1,3 @@
-from .exceptions import *
 import os as os
 import logging as Logger
 import requests as Requests
@@ -37,7 +36,28 @@ class PolyglotExtensions(object):
             )
         
         for language in dict(file_content):
-            pass
+            assert isinstance(file_content[language], dict), "Expected a dict"
+
+            for key in dict(file_content[language]):
+                if key != "extensions":
+                    del file_content[language][key]
+
+        return self.__search_directories(file_content)
+
+    def __search_directories(self, content):
+        for filename in os.listdir(self.directory_name):
+            if os.path.isfile(filename):
+                if "." not in filename:continue
+                extension = f".{str(filename).split('.')[-1]}"
+                language = self.__determine_language(extension, content)
+                print(language)
+
+    def __determine_language(self, ext, content):
+        for lang in content:
+            if "extensions" in content[lang]:
+                if str(ext) in content[lang]["extensions"]:
+                    return lang
+        return "Unknown Files"
 
     def __install_language_file(self):
         filename = os.path.join(os.getcwd(), "language.yml")
