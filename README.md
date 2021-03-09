@@ -19,3 +19,18 @@ python setup.py sdist
 
 pip install .
 ```
+
+## How to use it
+
+```python
+from polyglot import Polyglot
+import os as os
+
+# alternatively, you can use a dot(.) that denotes
+# the current directory
+# you can also simply use a filename like 'hello' that returns you (cwd/hello)
+
+dirname = os.getcwd()
+
+poly = Polyglot("init", dirname)
+```
