@@ -87,7 +87,7 @@ class PolyglotExtensions(object):
 class Polyglot(object):
     def __init__(self, command="init", command_argument=".", language_yml=None):
         assert isinstance(command, str), "Expected a string"
-        assert isinstance(command_argument, str), "Expected a strng"
+        assert isinstance(command_argument, str), "Expected a string"
 
         self.command = command
         self.parameters = command_argument
