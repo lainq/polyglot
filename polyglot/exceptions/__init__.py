@@ -22,7 +22,3 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 """
-
-from .polyglot import Polyglot
-
-__version__ = "1.0.0"
