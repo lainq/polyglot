@@ -1,7 +1,7 @@
 import os as os
 import logging as Logger
 import requests as Requests
-import yaml as YamlLoader
+import yaml as yaml_file_loader
 
 class PolyglotExtensions(object):
     def __init__(self, param):
@@ -39,8 +39,8 @@ class PolyglotExtensions(object):
                 yaml_file = self.__install_language_file()
 
         with open(yaml_file, "r") as yaml_reader:
-            file_content = YamlLoader.load(yaml_reader,
-                                           Loader=YamlLoader.FullLoader)
+            file_content = yaml_file_loader.load(yaml_reader,
+                                           Loader=yaml_file_loader.FullLoader)
 
         for language in dict(file_content):
             assert isinstance(file_content[language], dict), "Expected a dict"
