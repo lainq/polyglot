@@ -22,10 +22,22 @@ class PolyglotExtensions(object):
             else:
                 return os.path.join(os.getcwd(), param)
 
+    def __search_language_file(self, search_file_name="language", extension="yml"):
+        filename = f"{search_file_name}.{extension}"
+        if filename in os.listdir(self.directory_name):
+            return os.path.join(os.getcwd(), filename)
+
+        return None
+
     def find_files(self, yaml_file):
         if yaml_file == None:
-            Logger.error("Cannot find the language file")
-            yaml_file = self.__install_language_file()
+            search_yaml_file = self.__search_language_file()
+            if search_yaml_file is not None:
+                yaml_file = search_yaml_file
+            else:
+                log_messages = [Logger.error("Cannot find the language file"), Logger.warning("Installing the language file")]
+                yaml_file = self.__install_language_file()
+
         with open(yaml_file, "r") as yaml_reader:
             file_content = YamlLoader.load(yaml_reader,
                                            Loader=YamlLoader.FullLoader)
