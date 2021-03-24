@@ -6,6 +6,7 @@ import pprint as pprint
 
 printer = pprint.PrettyPrinter()
 
+
 class PolyglotExtensions(object):
     def __init__(self, param):
         assert isinstance(param, str), "Expected a string"
@@ -14,7 +15,6 @@ class PolyglotExtensions(object):
 
         self.directory_name = self.__get_dir_name(self.parameter)
         self.files = {}
-        
 
     def __get_dir_name(self, param):
         """Get the directory name pased on the parameter"""
@@ -31,11 +31,9 @@ class PolyglotExtensions(object):
             Logger.error("Cannot find the language file")
             yaml_file = self.__install_language_file()
         with open(yaml_file, "r") as yaml_reader:
-            file_content = YamlLoader.load(
-                yaml_reader,
-                Loader=YamlLoader.FullLoader
-            )
-        
+            file_content = YamlLoader.load(yaml_reader,
+                                           Loader=YamlLoader.FullLoader)
+
         for language in dict(file_content):
             assert isinstance(file_content[language], dict), "Expected a dict"
 
@@ -48,10 +46,10 @@ class PolyglotExtensions(object):
     def __search_directories(self, content):
         for filename in os.listdir(self.directory_name):
             if os.path.isfile(filename):
-                if "." not in filename:continue
+                if "." not in filename: continue
                 extension = f".{str(filename).split('.')[-1]}"
                 language = self.__determine_language(extension, content)
-                
+
                 if language in self.files:
                     self.files[language].append(filename)
                 else:
@@ -70,12 +68,8 @@ class PolyglotExtensions(object):
         url = "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
         Logger.info(f"Installing file from {url} to {filename}")
         try:
-            open(
-                filename,
-                "wb"
-            ).write(
-                Requests.get(url, allow_redirects=True).content
-            )
+            open(filename,
+                 "wb").write(Requests.get(url, allow_redirects=True).content)
         except Exception as exception:
             Logger.info("Process failed")
             raise exception
@@ -83,9 +77,11 @@ class PolyglotExtensions(object):
         return filename
 
 
-
 class Polyglot(object):
-    def __init__(self, command="init", command_argument=".", language_yml=None):
+    def __init__(self,
+                 command="init",
+                 command_argument=".",
+                 language_yml=None):
         assert isinstance(command, str), "Expected a string"
         assert isinstance(command_argument, str), "Expected a string"
 
@@ -102,6 +98,7 @@ class Polyglot(object):
         the reuslts as an array(list)
         """
         if self.command == "init":
-            return PolyglotExtensions(self.parameters).find_files(self.language_yaml)
+            return PolyglotExtensions(self.parameters).find_files(
+                self.language_yaml)
         else:
             raise NameError(f"Command {self.command} not found")
