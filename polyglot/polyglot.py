@@ -4,6 +4,8 @@ import requests as Requests
 import yaml as YamlLoader
 import pprint as pprint
 
+from polyglot.exceptions import PolyglotException
+
 printer = pprint.PrettyPrinter()
 
 
