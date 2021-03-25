@@ -3,6 +3,7 @@ from polyglot.extension import PolyglotExtensions
 
 import sys as sys, os as os
 
+
 def get_dir_name(param):
     """Get the directory name pased on the parameter"""
     if param == ".":
@@ -13,11 +14,11 @@ def get_dir_name(param):
         else:
             return os.path.join(os.getcwd(), param)
 
+
 class Polyglot(object):
-    def __init__(self,
-                 dirname=None,
-                 language_yml=None):
-        self.parameters = os.getcwd() if dirname != None else get_dir_name(dirname )
+    def __init__(self, dirname=None, language_yml=None):
+        self.parameters = os.getcwd() if dirname != None else get_dir_name(
+            dirname)
 
         self.language_yaml = language_yml
 
@@ -26,8 +27,10 @@ class Polyglot(object):
         Parse the results and show(return)
         the reuslts as an array(list)
         """
-        return PolyglotSearchResult(PolyglotExtensions(self.parameters).find_files(
+        return PolyglotSearchResult(
+            PolyglotExtensions(self.parameters).find_files(
                 self.language_yaml)).create_polyglot_result(self.parameters)
+
 
 class PolyglotSearchResult(object):
     def __init__(self, polyglot_object):
@@ -37,23 +40,26 @@ class PolyglotSearchResult(object):
             sys.exit()
 
     def __get_polyglot_object(self, polyglot_object):
-        return polyglot_object if (isinstance(polyglot_object, dict)) else False
+        return polyglot_object if (isinstance(polyglot_object,
+                                              dict)) else False
 
     def create_polyglot_result(self, file_name):
         polyglot_result_data = {}
         self.filename = file_name
 
-        polyglot_result_data["files"] = self.find_by_percentage(self.polyglot_object)
-        polyglot_result_data["lines"] = self.find_by_lines(self.polyglot_object)
+        polyglot_result_data["files"] = self.find_by_percentage(
+            self.polyglot_object)
+        polyglot_result_data["lines"] = self.find_by_lines(
+            self.polyglot_object)
 
         return polyglot_result_data
-
 
     def find_by_percentage(self, polyglot):
         file_percentage = {}
         for polyglot_file_type in polyglot:
             file_percentage[polyglot_file_type] = round(
-                (len(polyglot[polyglot_file_type])/len(self.file_length()))*100, 2)
+                (len(polyglot[polyglot_file_type]) / len(self.file_length())) *
+                100, 2)
         return file_percentage
 
     def find_by_lines(self, polyglot):
@@ -61,14 +67,13 @@ class PolyglotSearchResult(object):
         for file_type in polyglot:
             for filename in polyglot[file_type]:
                 with open(filename, "r") as line_counter:
-                    if not file_type in lines:lines[file_type] = 0
+                    if not file_type in lines: lines[file_type] = 0
 
-                    lines[file_type] += len(str(line_counter.read()).split("\n"))
+                    lines[file_type] += len(
+                        str(line_counter.read()).split("\n"))
         for file_type_count in lines:
             lines[file_type_count] = round(
-                (lines[file_type_count] / self.lines_length())*100,
-                2
-            )
+                (lines[file_type_count] / self.lines_length()) * 100, 2)
         return lines
 
     def lines_length(self):
@@ -88,5 +93,3 @@ class PolyglotSearchResult(object):
 
     def __len__(self):
         return 0
-
-        
