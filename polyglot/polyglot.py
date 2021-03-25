@@ -66,7 +66,7 @@ class PolyglotSearchResult(object):
                     lines[file_type] += len(str(line_counter.read()).split("\n"))
         for file_type_count in lines:
             lines[file_type_count] = round(
-                (lines[file_type_count] / len(self.lines_length()))*100,
+                (lines[file_type_count] / self.lines_length())*100,
                 2
             )
         return lines
@@ -74,7 +74,11 @@ class PolyglotSearchResult(object):
     def lines_length(self):
         files = self.file_length()
         count = 0
-        
+
+        for filename in files:
+            with open(filename, "r") as file_reader:
+                count += len(str(file_reader.read()).split("\n"))
+        return count
 
     def file_length(self):
         return list(filter(self.filter_files, os.listdir(self.filename)))
