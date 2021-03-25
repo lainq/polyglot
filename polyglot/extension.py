@@ -3,6 +3,7 @@ import logging as Logger
 import requests as Requests
 import yaml as yaml_file_loader
 
+
 class PolyglotExtensions(object):
     def __init__(self, param):
         assert isinstance(param, str), "Expected a string"
@@ -23,7 +24,7 @@ class PolyglotExtensions(object):
                 return os.path.join(os.getcwd(), param)
 
     def __search_language_file(self, search_file_name="language", extension="yml"):
-        filename = f"{search_file_name}.{extension}"
+        filename = f"{search_file_name}.{extension}"      
         if filename in os.listdir(self.directory_name):
             return os.path.join(os.getcwd(), filename)
 
