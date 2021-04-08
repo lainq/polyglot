@@ -1,18 +1,19 @@
 import os
 import stat
 
-from polyglot.core.extension import Extensions 
+from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
 
+
 class Polyglot(object):
-    def __init__(self, directory_name:str, ignore=[]):
+    def __init__(self, directory_name: str, ignore=[]):
         assert isinstance(ignore, list), "Expected to be a list"
         self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
         self.files = self.__find_directory_files(self.directory)
 
     @staticmethod
-    def find_directory_path(directory_path:str):
+    def find_directory_path(directory_path: str):
         """
         Determine the directory path based on
         the parameter. If the path is a dot(.) return the
@@ -46,7 +47,7 @@ class Polyglot(object):
         """
         filenames = []
         hidden_directories = []
-        for (root,dirs,files) in os.walk(directory, topdown=True):
+        for (root, dirs, files) in os.walk(directory, topdown=True):
             if Polyglot.is_hidden_directory(root):
                 hidden_directories.append(root)
 
@@ -58,11 +59,11 @@ class Polyglot(object):
 
         return filenames
 
-
     @staticmethod
     def is_hidden_directory(filepath):
         assert isinstance(filepath, str), "Expected a string"
-        return bool(os.stat(filepath).st_file_attributes & stat.FILE_ATTRIBUTE_HIDDEN)
+        return bool(
+            os.stat(filepath).st_file_attributes & stat.FILE_ATTRIBUTE_HIDDEN)
 
     def show(self, language_detection_file=None, display=False):
         extensions = Extensions(language_detection_file, display, self.files)

@@ -6,22 +6,26 @@ LANGUAGE_FILE = "https://raw.githubusercontent.com/github/linguist/master/lib/li
 
 
 def validate_argument_types(values, types, message):
-    assert len(values) == len(types), "Values and types should have the same length"
+    assert len(values) == len(
+        types), "Values and types should have the same length"
     for index in range(len(values)):
         assert isinstance(values[index], types[index]), str(message)
     return True
 
+
 def install_files(read_url, write_file_dir, filename, extension):
     assert isinstance(read_url, str), "Read url expected to be a string"
-    assert isinstance(write_file_dir, str), "Write path expected to be a string"
+    assert isinstance(write_file_dir,
+                      str), "Write path expected to be a string"
 
     filename = os.path.join(write_file_dir, f"{filename}.{extension}")
     try:
         with open(filename, "wb") as file_writer:
-            file_writer.write(requests.get(read_url, allow_redirects=True).content)
+            file_writer.write(
+                requests.get(read_url, allow_redirects=True).content)
     except Exception as exception:
         raise Exception
-    
+
     return filename
 
 
@@ -35,8 +39,7 @@ class Extensions(object):
         self.languages = {}
 
         self.content = self.remove_unwanted_keys(
-            self.__create_language_file(self.language_detection_file)[0]
-        )
+            self.__create_language_file(self.language_detection_file)[0])
 
     def get_extension_data(self):
         return self.__split_files(self.filenames, self.content)
@@ -51,7 +54,7 @@ class Extensions(object):
             language = self.__find_language_name(filename, content)
             if language not in self.languages:
                 self.languages[language] = []
-            
+
             self.languages[language].append(filename)
         return self.languages
 
@@ -91,7 +94,8 @@ class Extensions(object):
                 raise Exception("Language file expected to be a yaml file")
             return Extensions.read_file_data(language_file, True)
 
-        return Extensions.read_file_data(install_files(LANGUAGE_FILE, os.getcwd(), "language", "yml"), True)    
+        return Extensions.read_file_data(
+            install_files(LANGUAGE_FILE, os.getcwd(), "language", "yml"), True)
 
     @staticmethod
     def read_file_data(filename, is_yaml=False):
@@ -106,11 +110,5 @@ class Extensions(object):
 
             if not is_yaml:
                 return file_content, line_number_count
-            
+
             return yaml.safe_load(file_content), line_number_count
-
-    
-            
-        
-
-        
