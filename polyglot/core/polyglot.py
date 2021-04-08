@@ -46,3 +46,6 @@ class Polyglot(object):
 
     def show(self, language_detection_file=None, display=False):
         extensions = Extensions(language_detection_file, display, self.files)
+        data = extensions.get_extension_data()
+
+        print(data)
