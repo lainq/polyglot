@@ -1,5 +1,4 @@
-import os as os
-import logging as Logger
+import os
 import requests
 import yaml
 
@@ -28,6 +27,7 @@ def install_files(read_url, write_file_dir, filename, extension):
 
 class Extensions(object):
     def __init__(self, language_file, display, files):
+
         self.language_detection_file = language_file
         self.display_output = display
         self.filenames = files
@@ -42,6 +42,11 @@ class Extensions(object):
         return self.__split_files(self.filenames, self.content)
 
     def __split_files(self, files, content):
+        """
+        Loop through each file in the files array
+        and determine the language with the help of
+        the language extension 
+        """
         for filename in files:
             language = self.__find_language_name(filename, content)
             if language not in self.languages:
@@ -61,6 +66,11 @@ class Extensions(object):
         return "Unknown file"
 
     def remove_unwanted_keys(self, file_content):
+        """
+        Remove all the unwanted keys from the 
+        file_content dictionary and only keep
+        the 'extensions' key
+        """
         for language in dict(file_content):
             assert isinstance(file_content[language], dict), "Expected a dict"
             for key in dict(file_content[language]):
@@ -69,6 +79,13 @@ class Extensions(object):
         return file_content
 
     def __create_language_file(self, language_file):
+        """
+        If language file is mentioned, and the file is a string
+        return the filecontent and the number of lines
+
+        Else, install the language file from the internet
+        and return the file_content along with the number of lines
+        """
         if language_file is not None and isinstance(language_file, str):
             if not language_file.endswith(".yml"):
                 raise Exception("Language file expected to be a yaml file")
@@ -78,6 +95,11 @@ class Extensions(object):
 
     @staticmethod
     def read_file_data(filename, is_yaml=False):
+        """
+        Read the specified filename and if the file
+        is a yaml file,parse the yaml string
+        using the yaml library
+        """
         with open(filename, "r") as file_reader:
             file_content = file_reader.read()
             line_number_count = len(file_content.split("\n"))
