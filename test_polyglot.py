@@ -1,7 +1,4 @@
-from polyglot import Polyglot
-import os
+from polyglot.core import Polyglot
 
+polyglot = Polyglot(".")
 
-poly = Polyglot(os.getcwd()).show()
-
-print(poly)
