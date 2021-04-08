@@ -2,9 +2,12 @@ import os
 import stat
 
 from polyglot.core.extension import Extensions 
+from polyglot.core.result import Result
 
 class Polyglot(object):
-    def __init__(self, directory_name:str):
+    def __init__(self, directory_name:str, ignore=[]):
+        assert isinstance(ignore, list), "Expected to be a list"
+        self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
         self.files = self.__find_directory_files(self.directory)
 
@@ -34,6 +37,8 @@ class Polyglot(object):
 
             if not self.__find_hidden_files(hidden_directories, root):
                 for filename in files:
+                    if filename in self.ignore:
+                        continue
                     filenames.append(os.path.join(root, filename))
 
         return filenames
@@ -48,4 +53,5 @@ class Polyglot(object):
         extensions = Extensions(language_detection_file, display, self.files)
         data = extensions.get_extension_data()
 
-        print(data)
+        result = Result(data).show_file_information()
+        print(result)

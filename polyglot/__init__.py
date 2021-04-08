@@ -24,5 +24,3 @@ SOFTWARE.
 """
 
 # from .polyglot import Polyglot
-
-__version__ = "1.0.0"

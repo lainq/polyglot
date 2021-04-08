@@ -1,4 +1,4 @@
 from polyglot.core import Polyglot
 
-polyglot = Polyglot(".").show()
+polyglot = Polyglot(".", ignore=["language.yml"]).show()
 
