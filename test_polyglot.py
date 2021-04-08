@@ -1,4 +1,4 @@
 from polyglot.core import Polyglot
 
-polyglot = Polyglot(".")
+polyglot = Polyglot(".").show()
 

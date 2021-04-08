@@ -1,5 +1,8 @@
 import os
 import stat
+
+from polyglot.core.extension import Extensions 
+
 class Polyglot(object):
     def __init__(self, directory_name:str):
         self.directory = Polyglot.find_directory_path(directory_name)
@@ -40,3 +43,6 @@ class Polyglot(object):
     def is_hidden_directory(filepath):
         assert isinstance(filepath, str), "Expected a string"
         return bool(os.stat(filepath).st_file_attributes & stat.FILE_ATTRIBUTE_HIDDEN)
+
+    def show(self, language_detection_file=None, display=False):
+        extensions = Extensions(language_detection_file, display, self.files)
