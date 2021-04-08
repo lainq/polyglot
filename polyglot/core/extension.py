@@ -119,19 +119,18 @@ class Extensions(object):
         self.filenames = files
 
         content = self.remove_unwanted_keys(
-            self.__create_language_file(self.language_detection_file)
+            self.__create_language_file(self.language_detection_file)[0]
         )
 
         print(content)
 
     def remove_unwanted_keys(self, file_content):
-        # for language in dict(file_content):
-        #     assert isinstance(file_content[language], dict), "Expected a dict"
-        #     for key in dict(file_content[language]):
-        #         if key != "extensions":
-        #             del file_content[language][key]
-        # return file_content
-        print(file_content)
+        for language in dict(file_content):
+            assert isinstance(file_content[language], dict), "Expected a dict"
+            for key in dict(file_content[language]):
+                if key != "extensions":
+                    del file_content[language][key]
+        return file_content
 
     def __create_language_file(self, language_file):
         if language_file is not None and isinstance(language_file, str):
@@ -150,7 +149,7 @@ class Extensions(object):
             if not is_yaml:
                 return file_content, line_number_count
             
-            return yaml.load(file_reader, Loader=yaml.FullLoader), line_number_count
+            return yaml.safe_load(file_content), line_number_count
 
     
             
