@@ -1,6 +1,7 @@
 from prettytable import PrettyTable
 from clint.textui import colored
 
+
 class Display(object):
     def __init__(self, display_text):
         assert isinstance(display_text, dict), "Expected a dict"
@@ -19,11 +20,11 @@ class Display(object):
             table = PrettyTable()
             table.field_names = ["Language", display_text_type]
             for data in self.text[display_text_type]:
-                table.add_rows([
-                    [data, self.text[display_text_type][data]]
-                ])
+                table.add_rows([[data, self.text[display_text_type][data]]])
             print(colored.yellow(table))
 
     def verify_text(self):
-        assert isinstance(self.text["files"], dict), "Files expected to be a dict"
-        assert isinstance(self.text["lines"], dict), "lines expected to be a dict"
+        assert isinstance(self.text["files"],
+                          dict), "Files expected to be a dict"
+        assert isinstance(self.text["lines"],
+                          dict), "lines expected to be a dict"
