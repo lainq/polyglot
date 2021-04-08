@@ -3,6 +3,7 @@ import stat
 
 from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
+from polyglot.core.display import Display
 
 
 class Polyglot(object):
@@ -70,4 +71,6 @@ class Polyglot(object):
         data = extensions.get_extension_data()
 
         result = Result(data).show_file_information()
-        print(result)
+        if display:
+            display_text = Display(result)
+        return result
