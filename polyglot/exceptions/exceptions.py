@@ -1,4 +1,6 @@
-from clint.textui import colored 
+from clint.textui import colored
+
+
 class PolyglotFileNotFoundError(FileNotFoundError):
     def __init__(self, message):
         self.message = colored.red(message)
@@ -7,6 +9,3 @@ class PolyglotFileNotFoundError(FileNotFoundError):
 
     def str(self):
         return self.message
-
-
-

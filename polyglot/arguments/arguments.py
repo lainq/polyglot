@@ -5,23 +5,24 @@ import json
 from polyglot.arguments.position import Position
 from polyglot.exceptions.custom import PolyglotException
 from polyglot.core.polyglot import Polyglot
+
+
 class Arguments(object):
     def __init__(self, arguments=None, return_value=False):
         self.arguments = sys.argv[1:] if not arguments else arguments
         self.return_value = return_value
 
         self.position = Position(0)
-                
 
     def parse(self):
         assert isinstance(self.arguments, list)
         valid_flags = ["--dir", "--o", "--show", "--ignore"]
 
         parameters = {
-            "dir" : os.getcwd(),
-            "o" : None,
-            "show" : True,
-            "ignore" : []
+            "dir": os.getcwd(),
+            "o": None,
+            "show": True,
+            "ignore": []
         }
 
         current_character = self.position.current_character(self.arguments)
@@ -30,24 +31,21 @@ class Arguments(object):
                 exception = PolyglotException(
                     f"{current_character} is not recogonised as a valid parmeter",
                     f"Try again with valid parameters",
-                    fatal=False
-                )
+                    fatal=False)
                 return None
             character_key = current_character[2:]
             if "=" not in character_key:
                 exception = PolyglotException(
                     f"User equal-to(=) to add value to parameters",
                     f"Try again with valid values",
-                    fatal=False
-                )
+                    fatal=False)
                 return None
-            
+
             if character_key.count("=") > 1:
                 exception = PolyglotException(
                     f"More than one assignments for the same parameter",
                     f"Try again with valid values",
-                    fatal=False
-                )
+                    fatal=False)
                 return None
 
             data = character_key.split("=")
@@ -62,10 +60,7 @@ class Arguments(object):
         if return_data == None:
             return return_data
         else:
-            polyglot = Polyglot(
-                parameters["dir"],
-                ignore=parameters["ignore"]
-            )
+            polyglot = Polyglot(parameters["dir"], ignore=parameters["ignore"])
             data = polyglot.show(display=parameters["show"])
 
             if parameters["o"]:
@@ -84,11 +79,9 @@ class Arguments(object):
 
     def validate_parameters(self, parameters):
         if parameters["show"] not in [str(True), str(False)]:
-            exception = PolyglotException(
-                "Invalid value for paramter show",
-                "Try again",
-                fatal=False
-            )
+            exception = PolyglotException("Invalid value for paramter show",
+                                          "Try again",
+                                          fatal=False)
             return None
 
         parameters["show"] = bool(parameters["show"])
