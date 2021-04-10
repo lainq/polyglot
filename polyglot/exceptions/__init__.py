@@ -22,4 +22,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 """
-from .exceptions import PolyglotException
+from .custom import PolyglotException
+from .exceptions import *

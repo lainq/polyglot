@@ -5,14 +5,20 @@ from clint.textui import colored
 class Display(object):
     def __init__(self, display_text):
         assert isinstance(display_text, dict), "Expected a dict"
-
         self.text = display_text
+
         if not "files" in self.text or not "lines" in self.text:
             raise NameError("Cannot find required keys - lines, files")
 
         self.display_output()
 
     def display_output(self):
+        """
+        Verify the dict elements to be dicts 
+        and then continue to print out
+        the dict data in tabular form using
+        prettytable.
+        """
         self.verify_text()
 
         for display_text_type in self.text:

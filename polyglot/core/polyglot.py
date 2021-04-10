@@ -5,6 +5,9 @@ from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
 from polyglot.core.display import Display
 
+from polyglot.exceptions.exceptions import (
+    PolyglotFileNotFoundError
+)
 
 class Polyglot(object):
     def __init__(self, directory_name: str, ignore=[]):
@@ -29,7 +32,7 @@ class Polyglot(object):
         if os.path.isdir(directory_path):
             return directory_path
 
-        raise FileNotFoundError(f"{directory_path} does not exist")
+        raise PolyglotFileNotFoundError(f"{directory_path} does not exist")
 
     def __find_hidden_files(self, hidden, filepath):
         """

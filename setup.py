@@ -1,7 +1,6 @@
 import setuptools
 
 
-
 with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
@@ -18,7 +17,7 @@ setuptools.setup(
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pranavbaburaj/polyglot",
-    packages=setuptools.find_packages(),
+    packages=setuptools.find_packages(exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
     install_requires=DEPENDENCIES,
     classifiers=[
         "Programming Language :: Python :: 3",
