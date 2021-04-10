@@ -13,7 +13,7 @@ class Position(object):
         return self.position
 
     def current_character(self, data, increment_value=False):
-        assert isinstance(data, str), "Data expected to be a string"
+        assert isinstance(data, list), "Data expected to be a string"
         if len(data) == self.position:
             return None
         
