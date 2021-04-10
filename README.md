@@ -28,10 +28,6 @@ pip install .
 
 ```python
 from polyglot import Polyglot
-import os as os
-import pprint as pprint
-
-printer = pprint.PrettyPrinter()
 
 # alternatively, you can use a dot(.) that denotes
 # the current directory
