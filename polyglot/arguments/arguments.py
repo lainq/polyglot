@@ -1,17 +1,17 @@
 import sys
 import os
+import json
 
 from polyglot.arguments.position import Position
 from polyglot.exceptions.custom import PolyglotException
+from polyglot.core.polyglot import Polyglot
 class Arguments(object):
-    def __init__(self, arguments=None, execute=True, return_value=False):
+    def __init__(self, arguments=None, return_value=False):
         self.arguments = sys.argv[1:] if not arguments else arguments
-        self.execute = execute
         self.return_value = return_value
 
         self.position = Position(0)
-        
-        self.tokens = self.parse()
+                
 
     def parse(self):
         assert isinstance(self.arguments, list)
@@ -58,7 +58,22 @@ class Arguments(object):
             self.position.increment()
             current_character = self.position.current_character(self.arguments)
 
-        print(parameters)
+        return_data = self.validate_parameters(parameters)
+        if return_data == None:
+            return return_data
+        else:
+            polyglot = Polyglot(
+                parameters["dir"],
+                ignore=parameters["ignore"]
+            )
+            data = polyglot.show(display=parameters["show"])
+
+            if parameters["o"]:
+                with open(parameters["o"], "w") as writer:
+                    writer.write(json.dumps(data))
+
+            if self.return_value:
+                return data
 
     def is_valid_flag(self, valid_cases, current_character):
         for valid_case_index in range(len(valid_cases)):
@@ -66,3 +81,16 @@ class Arguments(object):
                 return True
 
         return False
+
+    def validate_parameters(self, parameters):
+        if parameters["show"] not in [str(True), str(False)]:
+            exception = PolyglotException(
+                "Invalid value for paramter show",
+                "Try again",
+                fatal=False
+            )
+            return None
+
+        parameters["show"] = bool(parameters["show"])
+        parameters["ignore"] = parameters["ignore"].split(",")
+        return parameters
