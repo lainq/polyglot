@@ -10,6 +10,18 @@ from polyglot.exceptions.exceptions import (
 )
 
 class Polyglot(object):
+    """
+    The main polyglot class. An instance of this class
+    is created by the user to use the core functions of
+    the module
+
+    Attributes:
+        ignore -- The files to ignore
+        directory -- The abspath of the directory to check
+        files -- All the files inside of the directory
+
+    """
+
     def __init__(self, directory_name: str, ignore=[]):
         assert isinstance(ignore, list), "Expected to be a list"
         self.ignore = ignore

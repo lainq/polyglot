@@ -27,7 +27,7 @@ pip install .
 ## How to use it
 
 ```python
-from polyglot import Polyglot
+from polyglot.core import Polyglot
 
 # alternatively, you can use a dot(.) that denotes
 # the current directory
@@ -36,7 +36,6 @@ from polyglot import Polyglot
 dirname = os.getcwd()
 
 poly = Polyglot("init", ignore=["language.yml"])
-
 poly.show(display=True)
 ```
 
