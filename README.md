@@ -80,7 +80,7 @@ polyglot = Polyglot(dirname)
 polyglot.show(display=True)
 
 ``` 
-```nim
+```
 +-------------------------+-------+
 |         Language        | files |
 +-------------------------+-------+
