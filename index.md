@@ -1,37 +1,47 @@
-## Welcome to GitHub Pages
+## `polyglot.core.Polyglot`
 
-You can use the [editor on GitHub](https://github.com/pranavbaburaj/polyglot/edit/gh-pages/index.md) to maintain and preview the content for your website in Markdown files.
+The `polyglot.core.Polyglot` is the main class of polyglot the polyglot module.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
-
-### Markdown
-
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
-
-```markdown
-Syntax highlighted code block
-
-# Header 1
-## Header 2
-### Header 3
-
-- Bulleted
-- List
-
-1. Numbered
-2. List
-
-**Bold** and _Italic_ and `Code` text
-
-[Link](url) and ![Image](src)
+```python
+from polyglot.core import Polyglot
 ```
 
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
+Initialize a polyglot instance
 
-### Jekyll Themes
+```python
+polyglot = Polyglot("path/to/directory", ignore=["language.yml"])
+```
 
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/pranavbaburaj/polyglot/settings/pages). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
+Polyglot takes in to parameters, the path to the directory and the ingore file
 
-### Support or Contact
+- directory_name(**required**) - `string` The path of the directory
+- ignore - `list` The files to ignore in the directory
 
-Having trouble with Pages? Check out our [documentation](https://docs.github.com/categories/github-pages-basics/) or [contact support](https://support.github.com/contact) and we’ll help you sort it out.
+Getting information from the polyglot object
+
+```python
+polyglot.show(language_detection_file="language.yml", display=True)
+```
+
+The `show` method takes in two parameters, the language detection file as well as the disply option
+
+- language_detection_file(**optional**) - `string` The yaml file containing information about all the languages. By default, the `language_detection_file` is set to `None`. and the file is downloaded from the internet.
+- display(**optional**) - `bool` Whether to output the table on the console or not. The show method returns a dict containing information about the files.
+
+## `polyglot.arguments.Arguments`
+
+The `polyglot.arguments.Arguments` helps you parse a set of arguments and execute functions accordingly.
+
+```python
+from polyglot.arugments import Arguments
+```
+
+passing in arguments
+
+```python
+args = Arguments(arguments=[], return_value=False)
+args.parse()
+```
+
+- arguments(**optional**) - `list` The set of arguments. By default, the arguments in set to `sys.argv[1:]`.
+- return_value(**optional**) - `bool` Whether to return anything or not
