@@ -35,8 +35,8 @@ class Arguments(object):
         parameters = {
             "dir": os.getcwd(),
             "o": None,
-            "show": True,
-            "ignore": []
+            "show": str(True),
+            "ignore": ""
         }
 
         current_character = self.position.current_character(self.arguments)

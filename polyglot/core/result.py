@@ -25,7 +25,7 @@ class Result(object):
         for file_type in data:
             file_line_count = 0
             for filename in data[file_type]:
-                with open(filename, "r") as line_counter:
+                with open(filename, "r", errors="ignore") as line_counter:
                     file_line_count += len(line_counter.read().split("\n"))
             lines[file_type] = file_line_count
         total_lines = sum([lines[key] for key in lines])
