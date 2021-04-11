@@ -8,6 +8,16 @@ from polyglot.core.polyglot import Polyglot
 
 
 class Arguments(object):
+    """
+    Pass a set of arguments which is parsed and
+    later executed
+
+    Attributes-
+        arguments -- The arguments to parse
+        return_value -- Whether to return any value
+        position -- The lexer postion
+
+    """
     def __init__(self, arguments=None, return_value=False):
         self.arguments = sys.argv[1:] if not arguments else arguments
         self.return_value = return_value
@@ -15,6 +25,10 @@ class Arguments(object):
         self.position = Position(0)
 
     def parse(self):
+        """
+        Parse the arguments and validate
+        them . Also execute the functions
+        """
         assert isinstance(self.arguments, list)
         valid_flags = ["--dir", "--o", "--show", "--ignore"]
 
