@@ -1,5 +1,3 @@
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
@@ -9,7 +7,7 @@
   <p align="center">
     Find the percentage of programming languages used in your project
     <br />
-    <a href="./docs">Documentation</a>
+    <a href="https://github.com/pranavbaburaj/polyglot/tree/main/docs">Documentation</a>
     ·
     <a href="https://github.com/pranavbaburaj/polyglot/issues">Report a Bug</a>
     ·
@@ -20,6 +18,7 @@
 </p>
 
 <!-- TABLE OF CONTENTS -->
+
 ## Table of Contents
 
 - [Table of Contents](#table-of-contents)
@@ -33,35 +32,33 @@
 - [License](#license)
 - [Contact](#contact)
 
-
-
 <!-- ABOUT THE PROJECT -->
+
 ## About The Project
 
 Find the percentage of programming languages used in your project
 
-
-
 <!-- GETTING STARTED -->
+
 ## Getting Started
 
 In order to get started, please install pip.
 
 ### Prerequisites
 
-* pip
+- pip
+
 ```sh
 sudo apt-get install python3-pip
 ```
 
-
 ### Installation
 
-* Install pip packages
+- Install pip packages
+
 ```sh
 pip3 install python-polyglot
 ```
-
 
 ## Usage
 
@@ -69,7 +66,7 @@ Once Polyglot is all setup and good to go, implementing is easy as pie.
 
 ### Initial Setup
 
- You can initialize Polyglot with the example below:
+You can initialize Polyglot with the example below:
 
 ```python
 from polyglot.core import Polyglot
@@ -79,7 +76,8 @@ dirname = "path/to/directory"
 polyglot = Polyglot(dirname)
 polyglot.show(display=True)
 
-``` 
+```
+
 ```
 +-------------------------+-------+
 |         Language        | files |
@@ -105,8 +103,8 @@ polyglot.show(display=True)
 +-------------------------+-------+
 ```
 
-
 <!-- CONTRIBUTING -->
+
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
@@ -117,17 +115,14 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin feature`)
 5. Open a Pull Request
 
-
-
 <!-- LICENSE -->
+
 ## License
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
-
-
 <!-- CONTACT -->
+
 ## Contact
 
 Pranav Baburaj - pranavbaburaj@zohomail.com
-
