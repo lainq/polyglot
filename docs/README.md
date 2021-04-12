@@ -19,7 +19,28 @@ polyglot = Polyglot("path/to/directory", ignore=["language.yml"])
 Polyglot takes in to parameters, the path to the directory and the ingore file
 
 - directory_name(**required**) - `string` The path of the directory
-- ignore - `list` The files to ignore in the directory
+- ignore - The ignore filename
+  <br>
+  The ignore file should have a `.polyglot` file extension and here in an example
+
+  <br>
+
+  `example.polyglot`
+  ```rb
+  # for file extensions
+  .yml
+
+  # for parent directories
+  dist/
+
+  # for specific file
+  README.md
+  ```
+
+  and use the file with the polyglot object
+  ```python
+  poly = Polyglot(".", "example.polyglot")
+  ```
 
 Getting information from the polyglot object
 
