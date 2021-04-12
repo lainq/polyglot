@@ -15,10 +15,44 @@ class Ignore(object):
     def __init__(self, ignore_list_filename):
         assert isinstance(ignore_list_filename, str)
 
-        self.ignore_files = {"files":[],"dirs":[], "ext":[]}
+        self.ignore_files = []
         self.ignore_list_filename = ignore_list_filename
         self.ignore_data = self.read_file(self.ignore_list_filename)
 
+        self.files = None
+
+    def create_ignore_files(self, files):
+        self.files = files
+        for ignore_data_line in self.ignore_data:
+            if ignore_data_line.startswith("."):
+                self.__find_file_extension(ignore_data_line)
+            elif ignore_data_line.endswith("/"):
+                self.find_dir_files(ignore_data_line[:-1])
+            else:
+                self.add_files(ignore_data_line)
+        print(self.ignore_files)
+
+    def find_dir_files(self, directory_name):
+        if not self.files:
+            return None
+        for filename in self.files:
+            dirname = os.path.basename(os.path.dirname(filename))
+            if dirname == directory_name:
+                self.ignore_files.append(filename)
+
+    def add_files(self, data_line):
+        if not self.files:
+            return None
+        for filename in self.files:
+            if os.path.basename(filename) == data_line:
+                self.ignore_files.append(filename)
+
+    def __find_file_extension(self, extension):
+        if not self.files:
+            return None
+        for filename in self.files:
+            if filename.endswith(extension):
+                self.ignore_files.append(filename)
 
     def __find_all_files(ignore_files, ignore_extensions, files):
         for filename_index in range(len(files)):

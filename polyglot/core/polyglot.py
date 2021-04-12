@@ -26,7 +26,7 @@ class Polyglot(object):
         assert isinstance(ignore, list), "Expected to be a list"
         self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
-        self.files = self.__find_directory_files(self.directory)
+        self.files = self.find_directory_files(self.directory)
 
     @staticmethod
     def find_directory_path(directory_path: str):
@@ -56,7 +56,7 @@ class Polyglot(object):
         ]
         return True in hidden_root
 
-    def __find_directory_files(self, directory):
+    def find_directory_files(self, directory):
         """
         Find all the files by walking through
         the directory tree
