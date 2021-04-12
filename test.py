@@ -1,3 +1,3 @@
-from polyglot.arguments import Arguments
+from polyglot.core.ignore import Ignore
 
-d = Arguments().parse()
+ignore_file = Ignore("ignore.polyglot")
