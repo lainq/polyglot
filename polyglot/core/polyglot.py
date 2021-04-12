@@ -6,9 +6,8 @@ from polyglot.core.result import Result
 from polyglot.core.display import Display
 from polyglot.core.ignore import Ignore
 
-from polyglot.exceptions.exceptions import (
-    PolyglotFileNotFoundError
-)
+from polyglot.exceptions.exceptions import (PolyglotFileNotFoundError)
+
 
 class Polyglot(object):
     """
@@ -22,9 +21,9 @@ class Polyglot(object):
         files -- All the files inside of the directory
 
     """
-
     def __init__(self, directory_name: str, ignore=None):
-        assert ignore == None or isinstance(ignore, str), "Expected to be a string or None"
+        assert ignore == None or isinstance(
+            ignore, str), "Expected to be a string or None"
         self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
         self.files = self.find_directory_files(self.directory)
@@ -32,8 +31,7 @@ class Polyglot(object):
         if self.ignore:
             self.files = Ignore.remove_specific_list_element(
                 self.files,
-                Ignore(self.ignore).create_ignore_files(self.files)
-            )
+                Ignore(self.ignore).create_ignore_files(self.files))
 
     @staticmethod
     def find_directory_path(directory_path: str):
