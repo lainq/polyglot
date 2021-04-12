@@ -22,6 +22,11 @@ class Ignore(object):
         self.files = None
 
     def create_ignore_files(self, files):
+        """
+        Update the ignore files list
+        based on information from the polyglot ignore
+        file
+        """
         self.files = files
         for ignore_data_line in self.ignore_data:
             if ignore_data_line.startswith("."):
@@ -33,6 +38,10 @@ class Ignore(object):
         return self.ignore_files
 
     def find_dir_files(self, directory_name):
+        """
+        Get all the files with the directory_name
+        as the parent directory
+        """
         if not self.files:
             return None
         for filename in self.files:
@@ -41,6 +50,10 @@ class Ignore(object):
                 self.ignore_files.append(filename)
 
     def add_files(self, data_line):
+        """
+        Added other files with the basename as
+        the data_line
+        """
         if not self.files:
             return None
         for filename in self.files:
@@ -48,6 +61,10 @@ class Ignore(object):
                 self.ignore_files.append(filename)
 
     def __find_file_extension(self, extension):
+        """
+        Add all the files with the specific
+        file extension
+        """
         if not self.files:
             return None
         for filename in self.files:
@@ -63,6 +80,9 @@ class Ignore(object):
         return ignore_files
 
     def read_file(self, read_file_name, ignore_text=True):
+        """
+        Valiate a file and read the file
+        """
         if not os.path.exists(read_file_name) or not os.path.isfile(read_file_name):
             raise IgnoreFileError(f"{read_file_name} is not a valid file")
 
@@ -82,6 +102,10 @@ class Ignore(object):
     
     @staticmethod
     def remove_specific_list_element(list_data, remove_element):
+        """
+        Remove a specific list of elements from another
+        list and return the new list
+        """
         assert isinstance(list_data, list)
         return_array = []
         for element in list_data:
