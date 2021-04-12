@@ -71,6 +71,8 @@ class Polyglot(object):
         for (root, dirs, files) in os.walk(directory, topdown=True):
             if not self.__find_hidden_files(hidden_directories, root):
                 for filename in files:
+                    if filename.startswith(os.path.join(self.directory, ".git")):
+                        continue
                     filenames.append(os.path.join(root, filename))
 
         return filenames

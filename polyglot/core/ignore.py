@@ -40,6 +40,8 @@ class Ignore(object):
                 self.add_root_dirs(ignore_data_line[1:],directory)
             else:
                 self.add_files(ignore_data_line)
+
+        self.add_root_dirs(".git", directory)
         return self.ignore_files
 
     def add_root_dirs(self, root, dirname):

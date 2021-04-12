@@ -8,7 +8,7 @@ DEPENDENCIES = ["requests", "pyyaml", "prettytable", "clint"]
 
 setuptools.setup(
     name="python-polyglot",  # Replace with your own username
-    version="4.0.0",
+    version="4.1.0",
     author="P Pranav Baburaj",
     author_email="code-roller@googlegroups.com",
     description=
