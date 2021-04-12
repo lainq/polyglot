@@ -23,4 +23,4 @@ SOFTWARE.
 
 """
 
-# from .polyglot import Polyglot
+from .core import Polyglot
