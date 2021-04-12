@@ -66,6 +66,7 @@ class Extensions(object):
 
             if extension in content[language_key]["extensions"]:
                 return language_key
+
         return "Unknown file"
 
     def remove_unwanted_keys(self, file_content):

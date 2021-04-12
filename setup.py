@@ -5,6 +5,7 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 DEPENDENCIES = ["requests", "pyyaml", "prettytable", "clint"]
 
+
 setuptools.setup(
     name="python-polyglot",  # Replace with your own username
     version="4.0.0",

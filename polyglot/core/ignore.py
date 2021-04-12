@@ -24,7 +24,7 @@ class Ignore(object):
 
         self.files = None
 
-    def create_ignore_files(self, files):
+    def create_ignore_files(self, files,directory):
         """
         Update the ignore files list
         based on information from the polyglot ignore
@@ -36,9 +36,21 @@ class Ignore(object):
                 self.__find_file_extension(ignore_data_line)
             elif ignore_data_line.endswith("/"):
                 self.find_dir_files(ignore_data_line[:-1])
+            elif ignore_data_line.startswith("~"):
+                self.add_root_dirs(ignore_data_line[1:],directory)
             else:
                 self.add_files(ignore_data_line)
         return self.ignore_files
+
+    def add_root_dirs(self, root, dirname):
+        root_directory = os.path.join(dirname, root)
+        if not self.files:
+            return None
+
+        for filename in self.files:
+            if filename.startswith(root_directory):
+                self.ignore_files.append(filename)
+
 
     def find_dir_files(self, directory_name):
         """

@@ -31,7 +31,7 @@ class Polyglot(object):
         if self.ignore:
             self.files = Ignore.remove_specific_list_element(
                 self.files,
-                Ignore(self.ignore).create_ignore_files(self.files))
+                Ignore(self.ignore).create_ignore_files(self.files, self.directory))
 
     @staticmethod
     def find_directory_path(directory_path: str):
@@ -69,20 +69,11 @@ class Polyglot(object):
         filenames = []
         hidden_directories = []
         for (root, dirs, files) in os.walk(directory, topdown=True):
-            if Polyglot.is_hidden_directory(root):
-                hidden_directories.append(root)
-
             if not self.__find_hidden_files(hidden_directories, root):
                 for filename in files:
                     filenames.append(os.path.join(root, filename))
 
         return filenames
-
-    @staticmethod
-    def is_hidden_directory(filepath):
-        assert isinstance(filepath, str), "Expected a string"
-        return bool(
-            os.stat(filepath).st_file_attributes & stat.FILE_ATTRIBUTE_HIDDEN)
 
     def show(self, language_detection_file=None, display=True):
         extensions = Extensions(language_detection_file, display, self.files)
