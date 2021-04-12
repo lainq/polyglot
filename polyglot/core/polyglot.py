@@ -4,6 +4,7 @@ import stat
 from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
 from polyglot.core.display import Display
+from polyglot.core.ignore import Ignore
 
 from polyglot.exceptions.exceptions import (
     PolyglotFileNotFoundError
@@ -22,11 +23,17 @@ class Polyglot(object):
 
     """
 
-    def __init__(self, directory_name: str, ignore=[]):
-        assert isinstance(ignore, list), "Expected to be a list"
+    def __init__(self, directory_name: str, ignore=None):
+        assert ignore == None or isinstance(ignore, str), "Expected to be a string or None"
         self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
         self.files = self.find_directory_files(self.directory)
+
+        if self.ignore:
+            self.files = Ignore.remove_specific_list_element(
+                self.files,
+                Ignore(self.ignore).create_ignore_files(self.files)
+            )
 
     @staticmethod
     def find_directory_path(directory_path: str):
@@ -69,8 +76,6 @@ class Polyglot(object):
 
             if not self.__find_hidden_files(hidden_directories, root):
                 for filename in files:
-                    if filename in self.ignore:
-                        continue
                     filenames.append(os.path.join(root, filename))
 
         return filenames
@@ -81,7 +86,7 @@ class Polyglot(object):
         return bool(
             os.stat(filepath).st_file_attributes & stat.FILE_ATTRIBUTE_HIDDEN)
 
-    def show(self, language_detection_file=None, display=False):
+    def show(self, language_detection_file=None, display=True):
         extensions = Extensions(language_detection_file, display, self.files)
         data = extensions.get_extension_data()
 

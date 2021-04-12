@@ -30,7 +30,7 @@ class Ignore(object):
                 self.find_dir_files(ignore_data_line[:-1])
             else:
                 self.add_files(ignore_data_line)
-        print(self.ignore_files)
+        return self.ignore_files
 
     def find_dir_files(self, directory_name):
         if not self.files:
@@ -75,16 +75,17 @@ class Ignore(object):
             if not ignore_text:
                 return file_data
             
-            return self.remove_specific_list_element(
+            return Ignore.remove_specific_list_element(
                 [(filename if len(filename.strip()) > 0 else None) for filename in file_data],
-                None
+                [None]
             )
     
-    def remove_specific_list_element(self, list_data, remove_element):
+    @staticmethod
+    def remove_specific_list_element(list_data, remove_element):
         assert isinstance(list_data, list)
         return_array = []
         for element in list_data:
-            if element != remove_element:
+            if element not in remove_element:
                 return_array.append(element)
         
         return return_array
