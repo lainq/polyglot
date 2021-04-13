@@ -79,7 +79,7 @@ class Polyglot(object):
 
     def show(self, language_detection_file=None, display=True):
         DEFAULT_LANGUAGE_DETECTION_FILE = "./language.yml"
-        if language_detection_file is not None and os.path.isfile(DEFAULT_LANGUAGE_DETECTION_FILE):
+        if language_detection_file is None and os.path.isfile(DEFAULT_LANGUAGE_DETECTION_FILE):
             language_detection_file = DEFAULT_LANGUAGE_DETECTION_FILE
 
         extensions = Extensions(language_detection_file, display, self.files)
