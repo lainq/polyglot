@@ -18,6 +18,7 @@ def install_files(read_url, write_file_dir, filename, extension):
     assert isinstance(write_file_dir,
                       str), "Write path expected to be a string"
 
+
     filename = os.path.join(write_file_dir, f"{filename}.{extension}")
     try:
         with open(filename, "wb") as file_writer:

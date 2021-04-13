@@ -1,5 +1,4 @@
 import os
-import stat
 
 from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
@@ -78,9 +77,12 @@ class Polyglot(object):
         return filenames
 
     def show(self, language_detection_file=None, display=True):
-        DEFAULT_LANGUAGE_DETECTION_FILE = "./language.yml"
-        if language_detection_file is None and os.path.isfile(DEFAULT_LANGUAGE_DETECTION_FILE):
-            language_detection_file = DEFAULT_LANGUAGE_DETECTION_FILE
+        DEFAULT_LANGUAGE_DETECTION_FILE = "language.yml"
+        if language_detection_file is None:
+            for filename in os.listdir(os.getcwd()):
+                if filename ==  DEFAULT_LANGUAGE_DETECTION_FILE and os.path.isfile(filename):
+                    language_detection_file = os.path.join(os.getcwd(),  filename)
+                    break
 
         extensions = Extensions(language_detection_file, display, self.files)
         data = extensions.get_extension_data()
