@@ -20,7 +20,7 @@
     <img src="https://img.shields.io/github/issues-pr/pranavbaburaj/polyglot.svg?style=flat">
     <img src="https://img.shields.io/github/contributors/pranavbaburaj/polyglot.svg?style=flat"> 
     <img src="https://static.pepy.tech/badge/python-polyglot">
-    <img src="https://img.shields.io/github/commit-activity/y/eslint/eslint.svg?style=flat">
+    <img src="https://img.shields.io/github/commit-activity/y/pranavbabura/polyglot.svg?style=flat">
   </p>
   <br />
 
