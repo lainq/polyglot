@@ -7,5 +7,5 @@ p = Polyglot(".", "ignore.polyglot")
 # ignore_file.create_ignore_files(p.find_directory_files(
 #     p.directory
 # ))
-p.show()
+p.show(fmt="f")
 

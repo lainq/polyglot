@@ -30,7 +30,8 @@ class Polyglot(object):
         if self.ignore:
             self.files = Ignore.remove_specific_list_element(
                 self.files,
-                Ignore(self.ignore).create_ignore_files(self.files, self.directory))
+                Ignore(self.ignore).create_ignore_files(
+                    self.files, self.directory))
 
     @staticmethod
     def find_directory_path(directory_path: str):
@@ -70,7 +71,8 @@ class Polyglot(object):
         for (root, dirs, files) in os.walk(directory, topdown=True):
             if not self.__find_hidden_files(hidden_directories, root):
                 for filename in files:
-                    if filename.startswith(os.path.join(self.directory, ".git")):
+                    if filename.startswith(os.path.join(
+                            self.directory, ".git")):
                         continue
                     filenames.append(os.path.join(root, filename))
 
@@ -80,8 +82,10 @@ class Polyglot(object):
         DEFAULT_LANGUAGE_DETECTION_FILE = "language.yml"
         if language_detection_file is None:
             for filename in os.listdir(os.getcwd()):
-                if filename ==  DEFAULT_LANGUAGE_DETECTION_FILE and os.path.isfile(filename):
-                    language_detection_file = os.path.join(os.getcwd(),  filename)
+                if filename == DEFAULT_LANGUAGE_DETECTION_FILE and os.path.isfile(
+                        filename):
+                    language_detection_file = os.path.join(
+                        os.getcwd(), filename)
                     break
 
         extensions = Extensions(language_detection_file, display, self.files)
@@ -97,5 +101,5 @@ class Polyglot(object):
             elif fmt.lower() == 'f':
                 result['lines'] = {}
                 display_text = Display(result)
-        else:
-            return result
+
+        return result
