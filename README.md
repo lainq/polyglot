@@ -20,7 +20,12 @@
     <img src="https://img.shields.io/github/issues-pr/pranavbaburaj/polyglot.svg?style=flat">
     <img src="https://img.shields.io/github/contributors/pranavbaburaj/polyglot.svg?style=flat"> 
     <img src="https://static.pepy.tech/badge/python-polyglot">
-    <img src="https://img.shields.io/github/commit-activity/y/pranavbabura/polyglot.svg?style=flat">
+    <img src="https://img.shields.io/discord/808537055177080892.svg">
+    <img src="https://img.shields.io/github/stars/pranavbaburaj/polyglot.svg?style=social&label=Stars&style=plastic">
+    <img src="https://img.shields.io/github/forks/pranavbaburaj/polyglot.svg?style=social&label=Fork&style=plastic">
+    <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
+    <img src="https://img.shields.io/github/last-commit/pranavbaburaj/polyglot">
+    <a href="https://twitter.com/intent/tweet?text=Find%20the%20percentage%20of%20programming%20languages%20in%20your%20project4&url=https://github.com/pranavbaburaj/polyglot&via=baburaj_pranav&hashtags=developers,polyglot,language"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
   </p>
   <br />
 
