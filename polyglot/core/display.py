@@ -22,12 +22,13 @@ class Display(object):
         self.verify_text()
 
         for display_text_type in self.text:
-            print("\n")
-            table = PrettyTable()
-            table.field_names = ["Language", display_text_type]
-            for data in self.text[display_text_type]:
-                table.add_rows([[data, self.text[display_text_type][data]]])
-            print(colored.yellow(table))
+            if bool(self.text[display_text_type]):
+                print("\n")
+                table = PrettyTable()
+                table.field_names = ["Language", display_text_type]
+                for data in self.text[display_text_type]:
+                    table.add_rows([[data, self.text[display_text_type][data]]])
+                print(colored.yellow(table))
 
     def verify_text(self):
         assert isinstance(self.text["files"],
