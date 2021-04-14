@@ -15,6 +15,11 @@
     ·
     <a href="https://github.com/pranavbaburaj/polyglot/pulls">Request Feature</a>
   </p>
+  <br>
+  <p align="center">
+    <img src="https://img.shields.io/github/issues-pr/pranavbaburaj/polyglot.svg?style=flat">
+    <img src="https://img.shields.io/github/contributors/pranavbaburaj/polyglot.svg?style=flat"> 
+  </p>
   <br />
 
 </p>
