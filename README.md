@@ -19,6 +19,8 @@
   <p align="center">
     <img src="https://img.shields.io/github/issues-pr/pranavbaburaj/polyglot.svg?style=flat">
     <img src="https://img.shields.io/github/contributors/pranavbaburaj/polyglot.svg?style=flat"> 
+    <img src="http://badge.fury.io/py/python-polyglot.svg">
+    <img src="https://static.pepy.tech/badge/python-polyglot">
   </p>
   <br />
 
