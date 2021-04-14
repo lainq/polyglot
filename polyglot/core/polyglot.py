@@ -76,7 +76,7 @@ class Polyglot(object):
 
         return filenames
 
-    def show(self, language_detection_file=None, display=True):
+    def show(self, language_detection_file=None, display=True, fmt=None):
         DEFAULT_LANGUAGE_DETECTION_FILE = "language.yml"
         if language_detection_file is None:
             for filename in os.listdir(os.getcwd()):
@@ -88,6 +88,14 @@ class Polyglot(object):
         data = extensions.get_extension_data()
 
         result = Result(data).show_file_information()
-        if display:
+        if display and fmt is None:
             display_text = Display(result)
-        return result
+        elif display and fmt is not None:
+            if fmt.lower() == 'l':
+                result['files'] = {}
+                display_text = Display(result)
+            elif fmt.lower() == 'f':
+                result['lines'] = {}
+                display_text = Display(result)
+        else:
+            return result
