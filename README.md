@@ -36,15 +36,15 @@
 ## Table of Contents
 
 - 📑 [Table of Contents](#table-of-contents)
-- 🙉 [About The Project](#about-the-project)
-- ⚡ [Getting Started](#getting-started)
-  - 📝 [Prerequisites](#prerequisites)
-  - ⬇️ [Installation](#installation)
-- 🎉 [Usage](#usage)
-  - 🔰 [Initial Setup](#initial-setup)
+- 🙉 [About The Project](#-about-the-project)
+- ⚡ [Getting Started](#-getting-started)
+  - 📝 [Prerequisites](#-prerequisites)
+  - ⬇️ [Installation](#-installation)
+- 🎉 [Usage](#-usage)
+  - 🔰 [Initial Setup](#-initial-setup)
 - [Contributing](#contributing)
-- 📰 [License](#license)
-- 📞 [Contact](#contact)
+- 📰 [License](#-license)
+- 📞 [Contact](#-contact)
 
 <!-- ABOUT THE PROJECT -->
 
