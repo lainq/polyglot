@@ -80,7 +80,11 @@ class Polyglot(object):
 
         return filenames
 
-    def show(self, language_detection_file=None, display=True, fmt=None, output=None):
+    def show(self,
+             language_detection_file=None,
+             display=True,
+             fmt=None,
+             output=None):
         DEFAULT_LANGUAGE_DETECTION_FILE = "language.yml"
         if language_detection_file is None:
             for filename in os.listdir(os.getcwd()):

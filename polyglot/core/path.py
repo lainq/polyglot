@@ -9,6 +9,7 @@ class LanguageException(FileNotFoundError):
         self.message = colored.red(text)
         super().__init__(self.message)
 
+
 class LanguageJSON(object):
     def __init__(self, json_path, rename=None):
         self.path = json_path
@@ -32,6 +33,3 @@ class LanguageJSON(object):
 
         os.rename(self.path, self.rename)
         return self.rename
-            
-            
-        

@@ -25,9 +25,12 @@ class Display(object):
             if bool(self.text[display_text_type]):
                 print("\n")
                 table = PrettyTable()
-                table.field_names = ["Language", display_text_type.capitalize()]
+                table.field_names = [
+                    "Language", display_text_type.capitalize()
+                ]
                 for data in self.text[display_text_type]:
-                    table.add_rows([[data, self.text[display_text_type][data]]])
+                    table.add_rows([[data,
+                                     self.text[display_text_type][data]]])
                 print(colored.yellow(table))
 
     def verify_text(self):

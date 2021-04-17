@@ -20,7 +20,6 @@ def install_files(read_url, write_file_dir, filename, extension):
     assert isinstance(write_file_dir,
                       str), "Write path expected to be a string"
 
-
     filename = os.path.join(write_file_dir, f"{filename}.{extension}")
     try:
         with open(filename, "wb") as file_writer:
@@ -94,14 +93,15 @@ class Extensions(object):
         and return the file_content along with the number of lines
         """
         if language_file is not None and isinstance(language_file, str):
-            if not language_file.endswith(".yml") and not language_file.endswith(".json") and not language_file.endswith(".yaml"):
-                raise Exception("Language file expected to be a yaml or json file")
+            if not language_file.endswith(
+                    ".yml") and not language_file.endswith(
+                        ".json") and not language_file.endswith(".yaml"):
+                raise Exception(
+                    "Language file expected to be a yaml or json file")
 
             if language_file.endswith(".json"):
                 filename = LanguageJSON(language_file).convert_to_yaml()
-                return Extensions.read_file_data(
-                    filename, True
-                )
+                return Extensions.read_file_data(filename, True)
             else:
                 return Extensions.read_file_data(language_file, True)
 
