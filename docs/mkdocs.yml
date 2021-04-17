@@ -2,4 +2,4 @@ site_name: Polyglot
 nav : 
   - Home : index.md
   - Blog : blog.md
-theme: readthedocs
+theme: material
