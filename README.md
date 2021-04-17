@@ -25,7 +25,7 @@
     <img src="https://img.shields.io/github/forks/pranavbaburaj/polyglot.svg?style=social&label=Fork&style=plastic">
     <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
     <img src="https://img.shields.io/github/last-commit/pranavbaburaj/polyglot">
-    <a href="https://twitter.com/intent/tweet?text=Find%20the%20percentage%20of%20programming%20languages%20in%20your%20project4&url=https://github.com/pranavbaburaj/polyglot&via=baburaj_pranav&hashtags=developers,polyglot,language"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
+    <a href="https://twitter.com/intent/tweet?text=Find%20the%20percentage%20of%20programming%20languages%20in%20your%20project&url=https://github.com/pranavbaburaj/polyglot&via=baburaj_pranav&hashtags=developers,polyglot,language"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
   </p>
   <br />
 
@@ -48,17 +48,17 @@
 
 <!-- ABOUT THE PROJECT -->
 
-## About The Project
+## 🙉 About The Project
 
 Find the percentage of programming languages used in your project
 
 <!-- GETTING STARTED -->
 
-## Getting Started
+## ⚡ Getting Started
 
 In order to get started, please install pip.
 
-### Prerequisites
+### 📝 Prerequisites
 
 - pip
 
@@ -66,7 +66,7 @@ In order to get started, please install pip.
 sudo apt-get install python3-pip
 ```
 
-### Installation
+### ⬇️ Installation
 
 - Install pip packages
 
@@ -74,7 +74,7 @@ sudo apt-get install python3-pip
 pip3 install python-polyglot
 ```
 
-## Usage
+## 🎉 Usage
 
 Once Polyglot is all setup and good to go, implementing is easy as pie.
 
