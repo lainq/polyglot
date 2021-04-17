@@ -35,16 +35,16 @@
 
 ## Table of Contents
 
-- [Table of Contents](#table-of-contents)
-- [About The Project](#about-the-project)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-  - [Initial Setup](#initial-setup)
+- 📑 [Table of Contents](#table-of-contents)
+- 🙉 [About The Project](#about-the-project)
+- ⚡ [Getting Started](#getting-started)
+  - 📝 [Prerequisites](#prerequisites)
+  - ⬇️ [Installation](#installation)
+- 🎉 [Usage](#usage)
+  - 🔰 [Initial Setup](#initial-setup)
 - [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
+- 📰 [License](#license)
+- 📞 [Contact](#contact)
 
 <!-- ABOUT THE PROJECT -->
 
@@ -78,7 +78,7 @@ pip3 install python-polyglot
 
 Once Polyglot is all setup and good to go, implementing is easy as pie.
 
-### Initial Setup
+### 🔰 Initial Setup
 
 You can initialize Polyglot with the example below:
 
@@ -131,12 +131,12 @@ Contributions are what make the open source community such an amazing place to b
 
 <!-- LICENSE -->
 
-## License
+## 📰 License
 
 Distributed under the MIT license. See `LICENSE` for more information.
 
 <!-- CONTACT -->
 
-## Contact
+## 📞 Contact
 
 Pranav Baburaj - pranavbaburaj@zohomail.com
