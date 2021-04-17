@@ -25,6 +25,9 @@ class Result(object):
         for file_type in data:
             file_line_count = 0
             for filename in data[file_type]:
+                if not os.path.exists(filename):
+                    continue
+                
                 with open(filename, "r", errors="ignore") as line_counter:
                     file_line_count += len(line_counter.read().split("\n"))
             lines[file_type] = file_line_count

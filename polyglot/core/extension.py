@@ -2,6 +2,8 @@ import os
 import requests
 import yaml
 
+from polyglot.core.path import LanguageJSON
+
 LANGUAGE_FILE = "https://raw.githubusercontent.com/github/linguist/master/lib/linguist/languages.yml"
 
 
@@ -93,8 +95,15 @@ class Extensions(object):
         """
         if language_file is not None and isinstance(language_file, str):
             if not language_file.endswith(".yml") and not language_file.endswith(".json"):
-                raise Exception("Language file expected to be a yaml file")
-            return Extensions.read_file_data(language_file, True)
+                raise Exception("Language file expected to be a yaml or json file")
+
+            if language_file.endswith(".json"):
+                filename = LanguageJSON(language_file).convert_to_yaml()
+                return Extensions.read_file_data(
+                    filename, True
+                )
+            else:
+                return Extensions.read_file_data(language_file, True)
 
         return Extensions.read_file_data(
             install_files(LANGUAGE_FILE, os.getcwd(), "language", "yml"), True)

@@ -14,8 +14,6 @@ class LanguageJSON(object):
         self.path = json_path
         self.rename = self.create_new_name(rename)
 
-        self.convert_to_yaml()
-
     def create_new_name(self, rename):
         if not isinstance(rename, str):
             filename = self.path.split(".")[0]
