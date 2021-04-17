@@ -1,8 +1,8 @@
-# Docs
+# Polyglot
 
 <hr>
 
-## `polyglot.core.Polyglot`
+## `Polyglot`
 
 The `polyglot.core.Polyglot` is the main class of polyglot the polyglot module.
 
@@ -21,21 +21,25 @@ Polyglot takes in to parameters, the path to the directory and the ingore file
 - directory_name(**required**) - `string` The path of the directory
 - ignore - The ignore filename
   <br>
-  The ignore file should have a `.polyglot` file extension and here in an example
+  The ignore file should have a `.polyglot` file extension and has a syntax similar to a `.gitignore` file.
+    -  `.<extension>` for file extensions
+    -  `<folder>/` for folders
+    -  `<filename>` for files
+```rb
+# for a specific file extension
+.json
 
-  <br>
+# for a specific folder
+dist/
 
-  `example.polyglot`
-  ```rb
-  # for file extensions
-  .yml
+# for a specific file
+dub.sdl
+LICENSE
 
-  # for parent directories
-  dist/
+# for specific folders in the directory
+~.tox
+```  
 
-  # for specific file
-  README.md
-  ```
 
   and use the file with the polyglot object
   ```python
@@ -53,7 +57,7 @@ The `show` method takes in two parameters, the language detection file as well a
 - language_detection_file(**optional**) - `string` The yaml file containing information about all the languages. By default, the `language_detection_file` is set to `None`. and the file is downloaded from the internet.
 - display(**optional**) - `bool` Whether to output the table on the console or not. The show method returns a dict containing information about the files.
 
-## `polyglot.arguments.Arguments`
+## `Arguments`
 
 The `polyglot.arguments.Arguments` helps you parse a set of arguments and execute functions accordingly.
 
