@@ -92,7 +92,7 @@ class Extensions(object):
         and return the file_content along with the number of lines
         """
         if language_file is not None and isinstance(language_file, str):
-            if not language_file.endswith(".yml"):
+            if not language_file.endswith(".yml") and not language_file.endswith(".json"):
                 raise Exception("Language file expected to be a yaml file")
             return Extensions.read_file_data(language_file, True)
 

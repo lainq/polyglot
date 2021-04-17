@@ -7,5 +7,5 @@ p = Polyglot(".", "ignore.polyglot")
 # ignore_file.create_ignore_files(p.find_directory_files(
 #     p.directory
 # ))
-p.show(fmt="f")
+p.show(fmt="f", language_detection_file="app.json")
 
