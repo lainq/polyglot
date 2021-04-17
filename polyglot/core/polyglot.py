@@ -1,4 +1,6 @@
 import os
+import json
+import yaml
 
 from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
@@ -78,7 +80,7 @@ class Polyglot(object):
 
         return filenames
 
-    def show(self, language_detection_file=None, display=True, fmt=None):
+    def show(self, language_detection_file=None, display=True, fmt=None, output=None):
         DEFAULT_LANGUAGE_DETECTION_FILE = "language.yml"
         if language_detection_file is None:
             for filename in os.listdir(os.getcwd()):
@@ -101,5 +103,12 @@ class Polyglot(object):
             elif fmt.lower() == 'f':
                 result['lines'] = {}
                 display_text = Display(result)
+
+        if isinstance(output, str):
+            with open(output, mode="w", encoding="utf8") as output_logger:
+                if output.endswith(".yml") or output.endswith(".yaml"):
+                    yaml.dump(result, output_logger, allow_unicode=True)
+                else:
+                    output_logger.write(json.dumps(result, indent=4))
 
         return result

@@ -12,6 +12,8 @@ ignore.polyglot
 
 .vscode/
 language.yml
+language.yaml
+
 # Distribution / packaging
 .Python
 build/
