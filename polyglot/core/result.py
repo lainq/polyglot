@@ -1,5 +1,6 @@
 import os
 
+from polyglot.core.ignore import Ignore
 
 class Result(object):
     def __init__(self, file_information):
@@ -20,7 +21,10 @@ class Result(object):
             self.data["files"][file_type] = {
                 "data" : round(
                 (len(data[file_type]) / length) * 100, 2),
-                "total" : len(data[file_type])
+                "total" : len(data[file_type]),
+                "blank" : len(Ignore.remove_specific_list_element([
+                    os.path.getsize(filename) == 0 for filename in data[file_type]
+                ], [False]))
             }
 
     def __find_by_lines(self, data):
@@ -47,5 +51,6 @@ class Result(object):
         for line_key in data:
             self.data["lines"][line_key] = {
                 "data" : round((lines[line_key] / total_lines) * 100, 2),
-                "total" : f"{lines.get(line_key)}({empty.get(line_key)} blank lines)"
+                "total" : lines.get(line_key),
+                "blank" : empty.get(line_key)
             }

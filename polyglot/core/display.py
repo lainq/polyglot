@@ -26,12 +26,15 @@ class Display(object):
                 print("\n")
                 table = PrettyTable()
                 table.field_names = [
-                    "Language", display_text_type.capitalize(), "Total"
+                    "Language", display_text_type.capitalize(), "Total","Blank"
                 ]
+
                 for data in self.text[display_text_type]:
                     current_data = self.text[display_text_type][data]
+                    current_row = [data, current_data.get("data"), current_data.get("total"), current_data.get("blank")]
+
                     table.add_rows([
-                        [data, current_data.get("data"), current_data.get("total")]
+                        current_row                        
                     ])
                 print(colored.yellow(table))
 
