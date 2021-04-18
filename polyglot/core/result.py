@@ -2,6 +2,7 @@ import os
 
 from polyglot.core.ignore import Ignore
 
+
 class Result(object):
     def __init__(self, file_information):
         assert isinstance(file_information, dict), "Expected a dict"
@@ -19,12 +20,16 @@ class Result(object):
         length = sum([len(data[key]) for key in data])
         for file_type in data:
             self.data["files"][file_type] = {
-                "data" : round(
-                (len(data[file_type]) / length) * 100, 2),
-                "total" : len(data[file_type]),
-                "blank" : len(Ignore.remove_specific_list_element([
-                    os.path.getsize(filename) == 0 for filename in data[file_type]
-                ], [False]))
+                "data":
+                round((len(data[file_type]) / length) * 100, 2),
+                "total":
+                len(data[file_type]),
+                "blank":
+                len(
+                    Ignore.remove_specific_list_element([
+                        os.path.getsize(filename) == 0
+                        for filename in data[file_type]
+                    ], [False]))
             }
 
     def __find_by_lines(self, data):
@@ -50,7 +55,7 @@ class Result(object):
         total_lines = sum([lines[key] for key in lines])
         for line_key in data:
             self.data["lines"][line_key] = {
-                "data" : round((lines[line_key] / total_lines) * 100, 2),
-                "total" : lines.get(line_key),
-                "blank" : empty.get(line_key)
+                "data": round((lines[line_key] / total_lines) * 100, 2),
+                "total": lines.get(line_key),
+                "blank": empty.get(line_key)
             }
