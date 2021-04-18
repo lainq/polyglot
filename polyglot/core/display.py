@@ -26,11 +26,13 @@ class Display(object):
                 print("\n")
                 table = PrettyTable()
                 table.field_names = [
-                    "Language", display_text_type.capitalize()
+                    "Language", display_text_type.capitalize(), "Total"
                 ]
                 for data in self.text[display_text_type]:
-                    table.add_rows([[data,
-                                     self.text[display_text_type][data]]])
+                    current_data = self.text[display_text_type][data]
+                    table.add_rows([
+                        [data, current_data.get("data"), current_data.get("total")]
+                    ])
                 print(colored.yellow(table))
 
     def verify_text(self):
