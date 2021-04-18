@@ -7,5 +7,5 @@ p = Polyglot(".", "ignore.polyglot")
 # ignore_file.create_ignore_files(p.find_directory_files(
 #     p.directory
 # ))
-p.show(language_detection_file="language.yaml")
+p.show(language_detection_file="language.yaml",output="l.toml")
 

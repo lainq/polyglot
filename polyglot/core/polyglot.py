@@ -1,6 +1,7 @@
 import os
 import json
 import yaml
+import toml
 
 from polyglot.core.extension import Extensions
 from polyglot.core.result import Result
@@ -112,6 +113,8 @@ class Polyglot(object):
             with open(output, mode="w", encoding="utf8") as output_logger:
                 if output.endswith(".yml") or output.endswith(".yaml"):
                     yaml.dump(result, output_logger, allow_unicode=True)
+                elif output.endswith(".toml"):
+                    output_logger.write(toml.dumps(result))
                 else:
                     output_logger.write(json.dumps(result, indent=4))
 
