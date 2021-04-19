@@ -21,7 +21,7 @@ class Result(object):
         for file_type in data:
             self.data["files"][file_type] = {
                 "data":
-                round((len(data[file_type]) / length) * 100, 2),
+                f"{round((len(data[file_type]) / length) * 100, 2)} %",
                 "total":
                 len(data[file_type]),
                 "blank":
@@ -55,7 +55,7 @@ class Result(object):
         total_lines = sum([lines[key] for key in lines])
         for line_key in data:
             self.data["lines"][line_key] = {
-                "data": round((lines[line_key] / total_lines) * 100, 2),
+                "data": f"{round((lines[line_key] / total_lines) * 100, 2)} %",
                 "total": lines.get(line_key),
                 "blank": empty.get(line_key)
             }

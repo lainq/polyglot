@@ -1,0 +1,69 @@
+[files."Unknown file"]
+data = "13.89 %"
+total = 5
+blank = 0
+
+[files.TOML]
+data = "2.78 %"
+total = 1
+blank = 0
+
+[files.YAML]
+data = "2.78 %"
+total = 1
+blank = 0
+
+[files."GCC Machine Description"]
+data = "8.33 %"
+total = 3
+blank = 0
+
+[files.Text]
+data = "13.89 %"
+total = 5
+blank = 0
+
+[files.Python]
+data = "55.56 %"
+total = 20
+blank = 0
+
+[files.JSON]
+data = "2.78 %"
+total = 1
+blank = 0
+
+[lines."Unknown file"]
+data = "29.65 %"
+total = 3488
+blank = 100
+
+[lines.TOML]
+data = "0.6 %"
+total = 70
+blank = 14
+
+[lines.YAML]
+data = "58.37 %"
+total = 6865
+blank = 1
+
+[lines."GCC Machine Description"]
+data = "2.97 %"
+total = 349
+blank = 90
+
+[lines.Text]
+data = "0.31 %"
+total = 36
+blank = 4
+
+[lines.Python]
+data = "8.07 %"
+total = 949
+blank = 205
+
+[lines.JSON]
+data = "0.04 %"
+total = 5
+blank = 0
