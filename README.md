@@ -71,6 +71,8 @@ sudo apt-get install python3-pip
 - Install pip packages
 
 ```sh
+# install the python-polyglot package using pip
+
 pip3 install python-polyglot
 ```
 
@@ -93,28 +95,30 @@ polyglot.show(display=True)
 ```
 
 ```
-+-------------------------+-------+
-|         Language        | files |
-+-------------------------+-------+
-|       Ignore List       |  5.88 |
-| GCC Machine Description | 11.76 |
-|          Unknown        |  5.88 |
-|           Text          |  5.88 |
-|          Python         | 64.71 |
-|           JSON          |  5.88 |
-+-------------------------+-------+
++-------------------------+---------+-------+-------+
+|         Language        |  Files  | Total | Blank |
++-------------------------+---------+-------+-------+
+|       Unknown file      | 13.89 % |   5   |   0   |
+|           YAML          |  2.78 % |   1   |   0   |
+| GCC Machine Description |  8.33 % |   3   |   0   |
+|           Text          | 13.89 % |   5   |   0   |
+|          Python         | 55.56 % |   20  |   0   |
+|           TOML          |  2.78 % |   1   |   0   |
+|           JSON          |  2.78 % |   1   |   0   |
++-------------------------+---------+-------+-------+
 
 
-+-------------------------+-------+
-|         Language        | lines |
-+-------------------------+-------+
-|       Ignore List       | 17.22 |
-| GCC Machine Description | 22.24 |
-|         Unknown         |  2.83 |
-|           Text          |  0.26 |
-|          Python         | 57.07 |
-|           JSON          |  0.39 |
-+-------------------------+-------+
++-------------------------+---------+-------+-------+
+|         Language        |  Lines  | Total | Blank |
++-------------------------+---------+-------+-------+
+|       Unknown file      | 29.67 % |  3491 |  101  |
+|           YAML          | 58.35 % |  6865 |   1   |
+| GCC Machine Description |  2.97 % |  349  |   90  |
+|           Text          |  0.31 % |   36  |   4   |
+|          Python         |  8.07 % |  949  |  205  |
+|           TOML          |  0.59 % |   70  |   14  |
+|           JSON          |  0.04 % |   5   |   0   |
++-------------------------+---------+-------+-------+
 ```
 
 <!-- CONTRIBUTING -->
