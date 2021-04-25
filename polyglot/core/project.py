@@ -2,11 +2,13 @@ import os
 
 from polyglot.core import Polyglot
 
+
 class ProjectFiles(object):
     def __init__(self, files, folders):
         assert isinstance(files, dict), "Files expected to be a dict"
         self.files = files
         self.folders = folders
+
 
 class Project(object):
     def __init__(self, project_name, project_files, polyglot=False):
@@ -47,7 +49,8 @@ class Project(object):
 
         if self.polyglot:
             polyglot = Polyglot(directory, "ignore.polyglot")
-            polyglot.show(display=False, output=os.path.join(directory, "polyglot.json"))
+            polyglot.show(display=False,
+                          output=os.path.join(directory, "polyglot.json"))
 
     def write_file_data(self, filename, data=""):
         with open(filename, "w") as file_writer:
