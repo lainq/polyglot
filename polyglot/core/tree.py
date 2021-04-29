@@ -49,6 +49,8 @@ class Tree(object):
             for pointer, path in zip(pointers, contents):
                 root = os.path.abspath(os.path.dirname(path.absolute()))
                 if path.is_dir():
+                    if ".git" in str(path.absolute()):
+                        continue
                     yield prefix + pointer + path.name
                     extension = self.branch if pointer == self.tree else self.space
                     yield from inner(path,
@@ -59,7 +61,7 @@ class Tree(object):
 
         iterator = inner(path, level=level)
         for line in itertools.islice(iterator, length_limit):
-            print(clint.textui.colored.yellow(line))
+            print(clint.textui.colored.cyan(line))
         if next(iterator, None):
             print(
                 clint.textui.colored.red(
