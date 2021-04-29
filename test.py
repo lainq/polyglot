@@ -1,8 +1,6 @@
-from polyglot.core.project import Project, ProjectFiles
+from poylglot.core.tree import Tree
+from polyglot.core.ignore import Ignore
 
-d = Project("hello",
-            ProjectFiles({
-                "lol.py": "dd",
-                "ap.js": "0"
-            }, ["lmao"]),
-            polyglot=True).create()
+import os
+
+d = Tree(os.getcwd(), Ignore("ignore.polyglot"))
