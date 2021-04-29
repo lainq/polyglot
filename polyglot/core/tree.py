@@ -2,6 +2,8 @@ import os
 import pathlib
 import itertools
 import clint
+
+from polyglot.core.ignore import Ignore
 class UnknownPathError(FileNotFoundError):
     def __init__(self, error_message):
         self.message = clint.textui.colored.red(error_message)
@@ -14,9 +16,9 @@ class Tree(object):
     tree = '├── '
     last = '└── '
 
-    def __init__(self, directory, ignore):
+    def __init__(self, directory):
         self.directory = directory if self.__verify_directory_path(os.getcwd() if directory == "." else directory) else None
-        self.
+
 
     def __verify_directory_path(self, directory):
         if not os.path.exists(directory) or not os.path.isdir(directory):
@@ -52,5 +54,4 @@ class Tree(object):
             print(clint.textui.colored.red(
                 f'... length_limit, {length_limit}, reached, counted:'
             ))
-t = Tree(".").generate()
         
