@@ -7,7 +7,7 @@ class TestCases(unittest.TestCase):
     """Advanced test cases."""
     def test_application(self):
         d = PolyglotPath(".")
-        print(len(d))
+        print(d.stat.parent)
         self.assertIsNone(None)
 
 
