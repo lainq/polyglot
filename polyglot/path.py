@@ -1,9 +1,20 @@
 import os
 from clint.textui import colored
+from collections.abc import Iterable
+
+class DirectoryError(Exception):
+    def __init__(self, error_message):
+        self.error_message = colored.red(error_message)
+
+        super().__init__(self.error_message)
 
 class Log(object):
     def __init__(self, message, critical=False):
-        pass
+        self.message = colored.red(message) if critical else colored.cyan(message)
+        self.create_message_log(self.message)
+
+    def create_message_log(self, message, end='\n'):
+        print(message, end=end)
 
 class _Stat(object):
     def __init__(self, path):
@@ -41,8 +52,24 @@ class PolyglotPath(object):
     def is_directory(self):
         return os.path.isdir(self.directory)
 
-    def touch(self, create_files, log=True):
-        pass
+    def touch(self, create_files=[], log=True):
+        assert isinstance(create_files, Iterable), "Parameter expected to be an iterable"
+
+        for index, filename in enumerate(create_files):
+            with open(os.path.join(self.directory, filename), "w") as create_file_writer:
+                create_file_writer.write("")
+
+            log = Log(f"{index+1} Created {filename}")
+
+    def mkdirs(self, directories, log=True, overwrite=False):
+        assert isinstance(directories, Iterable)
+
+        for index, dirname in enumerate(directories):
+            if os.path.exists(dirname) and os.path.isdir(dirname):
+                Log(f'{index+1} Failed to create {dirname}', critical=True)
+            else:
+                os.mkdir(dirname)
+                Log(f"{index+1}. Created {dirname}")
 
     @property
     def parent(self):
