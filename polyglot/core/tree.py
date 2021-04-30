@@ -3,8 +3,6 @@ import pathlib
 import itertools
 import clint
 
-from polyglot.core.ignore import Ignore
-
 
 class UnknownPathError(FileNotFoundError):
     def __init__(self, error_message):

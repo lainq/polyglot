@@ -9,3 +9,4 @@ import polyglot
 from polyglot.core import *
 from polyglot.exceptions import *
 from polyglot.arguments import *
+from polyglot.path import PolyglotPath
