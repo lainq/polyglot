@@ -2,19 +2,23 @@ import os
 from clint.textui import colored
 from collections.abc import Iterable
 
+
 class DirectoryError(Exception):
     def __init__(self, error_message):
         self.error_message = colored.red(error_message)
 
         super().__init__(self.error_message)
 
+
 class Log(object):
     def __init__(self, message, critical=False):
-        self.message = colored.red(message) if critical else colored.cyan(message)
+        self.message = colored.red(message) if critical else colored.cyan(
+            message)
         self.create_message_log(self.message)
 
     def create_message_log(self, message, end='\n'):
         print(message, end=end)
+
 
 class _Stat(object):
     def __init__(self, path):
@@ -28,15 +32,16 @@ class _Stat(object):
 
     def __repr__(self):
         return str({
-            "parent" : self.parent,
-            "basename" : self.basename,
-            "directory" : self.directory,
-            "file" : self.file,
-            "abs" : self.absolute
+            "parent": self.parent,
+            "basename": self.basename,
+            "directory": self.directory,
+            "file": self.file,
+            "abs": self.absolute
         })
 
     def __str__(self):
         return self.__repr__()
+
 
 class PolyglotPath(object):
     def __init__(self, path=None):
@@ -53,10 +58,12 @@ class PolyglotPath(object):
         return os.path.isdir(self.directory)
 
     def touch(self, create_files=[], log=True):
-        assert isinstance(create_files, Iterable), "Parameter expected to be an iterable"
+        assert isinstance(create_files,
+                          Iterable), "Parameter expected to be an iterable"
 
         for index, filename in enumerate(create_files):
-            with open(os.path.join(self.directory, filename), "w") as create_file_writer:
+            with open(os.path.join(self.directory, filename),
+                      "w") as create_file_writer:
                 create_file_writer.write("")
 
             log = Log(f"{index+1} Created {filename}")
@@ -88,7 +95,5 @@ class PolyglotPath(object):
     def __len__(self):
         if not os.path.isdir(self.directory):
             return -1
-        
-        return len(os.listdir(self.directory))
 
-    
+        return len(os.listdir(self.directory))
