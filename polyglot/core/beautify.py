@@ -2,6 +2,30 @@ import os
 
 from polyglot.path import DirectoryError
 
+class ExtensionMap(object):
+    def __init__(self, extensions={}):
+        assert isinstance(extensions, dict), "Extensions expected to be a dict"
+        self.extensions = {}
+        self.__add_all_extensions(extensions)
+
+    def __add_all_extensions(self, extensions):
+        self.extensions = extensions
+
+    def add(self, folder, extensions):
+        if self.extensions.get(folder):
+            raise KeyError(f"{folder} already exists in the map")
+
+        self.extensions.setdefault(folder, extensions)
+
+    def remove(self, folder):
+        if folder not in self.extensions:
+            raise KeyError(f"{folder} does not exist")
+
+        del self.extensions[folder]
+
+    def get(self):
+        return self.extensions
+
 
 class _Prompt(object):
     def __init__(self, prompt, options, require=True):
@@ -18,6 +42,8 @@ class _Prompt(object):
 
 class Beautify(object):
     def __init__(self, directory, extensions, prompt=True):
+        assert isinstance(extensions, (dict, ExtensionMap))
+
         self.directory = self.__is_directory(directory)
         self.extensions = extensions
 
@@ -25,16 +51,17 @@ class Beautify(object):
 
     def clean_directory(self, prompt):
         if prompt:
-            prompt = _Prompt("Do you want to clear the directory",
+            data = _Prompt("Do you want to clear the directory",
                              ["y", "n"]).create_prompt()
-            if prompt:
+            if data:
                 self.__clean()
-                return None
+
+            return None
 
         self.__clean()
 
     def __clean(self):
-        pass
+        print("LOl")
 
     def __is_directory(self, directory):
         is_directory = os.path.isdir(directory)

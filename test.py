@@ -1,5 +1,6 @@
-from polyglot.core.beautify import Beautify
+from polyglot.core.beautify import Beautify, ExtensionMap
 import os
 
-
-b = Beautify(os.getcwd(), {})
+b = Beautify(os.getcwd(), ExtensionMap({
+    "lol" : []
+}))
