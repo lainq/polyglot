@@ -7,7 +7,7 @@ class TestCases(unittest.TestCase):
     """Advanced test cases."""
     def test_application(self):
         d = PolyglotPath(".")
-        d.mkdirs(["dist"])
+        print(d.listdir())
         self.assertIsNone(None)
 
 

@@ -9,6 +9,24 @@ class DirectoryError(Exception):
 
         super().__init__(self.error_message)
 
+class FileContentFilter(object):
+    def __init__(self, files=None, folders=None):
+        self.__validate_parameter_types(files=files, folders=folders)
+
+        self.files = files
+        self.folders = folders
+
+    def __validate_parameter_types(self, **kwargs):
+        valid_types = bool
+        for parameter_key, value in kwargs.items():
+            if not type(value) == valid_types:
+                if value == None:
+                    continue
+                raise TypeError(
+                    f"{parameter_key} expected to be of type bool or None"
+                )
+        return True
+        
 
 class Log(object):
     def __init__(self, message, critical=False):
@@ -54,6 +72,17 @@ class PolyglotPath(object):
         return path
 
     @property
+    def basename(self):
+        return os.path.basename(self.directory)
+
+    def listdir(self):
+        return os.listdir(self.directory)
+
+    @property
+    def content(self):
+        return self.listdir()
+
+    @property
     def is_directory(self):
         return os.path.isdir(self.directory)
 
@@ -77,6 +106,13 @@ class PolyglotPath(object):
             else:
                 os.mkdir(dirname)
                 Log(f"{index+1}. Created {dirname}")
+
+    def join(self, *args):
+        path = self.directory
+        for joinpath in args:
+            path = os.path.join(path, joinpath)
+
+        return path
 
     @property
     def parent(self):
