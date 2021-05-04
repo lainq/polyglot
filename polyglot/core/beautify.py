@@ -2,6 +2,7 @@ import os
 
 from polyglot.path import DirectoryError
 
+
 class ExtensionMap(object):
     def __init__(self, extensions={}):
         assert isinstance(extensions, dict), "Extensions expected to be a dict"
@@ -9,9 +10,28 @@ class ExtensionMap(object):
         self.__add_all_extensions(extensions)
 
     def __add_all_extensions(self, extensions):
+        """
+        Add all the extensions from the dict passed 
+        in as a parameter
+
+        Args:
+            extensions (dict): The dict to copy
+        """
         self.extensions = extensions
 
     def add(self, folder, extensions):
+        """
+        Add a new folder to the extension map with its
+        associated extension array
+
+        Args:
+            folder (string): The name of the folder
+            extensions (Iterable): The extensions to search for
+
+        Raises:
+            KeyError: Raises an error when the key already
+            exists in the map
+        """
         if self.extensions.get(folder):
             raise KeyError(f"{folder} already exists in the map")
 
@@ -42,7 +62,9 @@ class _Prompt(object):
 
 class Beautify(object):
     def __init__(self, directory, extensions, prompt=True):
-        assert isinstance(extensions, (dict, ExtensionMap))
+        assert isinstance(
+            extensions,
+            ExtensionMap), "extensions expected to be an extension map"
 
         self.directory = self.__is_directory(directory)
         self.extensions = extensions
@@ -52,7 +74,7 @@ class Beautify(object):
     def clean_directory(self, prompt):
         if prompt:
             data = _Prompt("Do you want to clear the directory",
-                             ["y", "n"]).create_prompt()
+                           ["y", "n"]).create_prompt()
             if data:
                 self.__clean()
 
@@ -61,7 +83,10 @@ class Beautify(object):
         self.__clean()
 
     def __clean(self):
-        print("LOl")
+        replace_files = {}
+        data = self.extensions.get()
+        for filename in os.listdir(self.directory):
+            pass
 
     def __is_directory(self, directory):
         is_directory = os.path.isdir(directory)
