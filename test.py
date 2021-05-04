@@ -1,5 +1,5 @@
-from polyglot.core.tree import Tree
-
+from polyglot.core.beautify import Beautify
 import os
 
-d = Tree(os.getcwd()).generate()
+
+b = Beautify(os.getcwd(), {})
