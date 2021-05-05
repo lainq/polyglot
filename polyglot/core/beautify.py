@@ -1,9 +1,23 @@
 import os
 import shutil
 from clint.textui import colored
+from collections.abc import Iterable
 
 from polyglot.path import DirectoryError
 
+class _ExtensionsionType():
+    required_type = Iterable
+
+    def __init__(self, placeholder):
+        self.value = placeholder
+        self.check_value_type(self.value)
+
+    def check_value_type(self, value):
+        if not isinstance(value, self.required_type):
+            raise TypeError(colored.red(f"{value} not an iterable"))
+
+    def __repr__(self):
+        return self.value
 
 class ExtensionMap(object):
     def __init__(self, extensions={}):
@@ -19,6 +33,8 @@ class ExtensionMap(object):
         Args:
             extensions (dict): The dict to copy
         """
+        for key in extensions:
+            _ExtensionsionType(extensions[key])
         self.extensions = extensions
 
     def add(self, folder, extensions):
@@ -37,6 +53,7 @@ class ExtensionMap(object):
         if self.extensions.get(folder):
             raise KeyError(f"{folder} already exists in the map")
 
+        _ExtensionsionType(extensions)
         self.extensions.setdefault(folder, extensions)
 
     def remove(self, folder):
