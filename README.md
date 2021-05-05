@@ -8,7 +8,7 @@
   <p align="center">
     Find the percentage of programming languages used in your project
     <br />
-    <a href="https://python-polyglot.netlify.app/">Documentation</a>
+    <a href="https://python-polyglot.netlify.app/">📖 Documentation</a>
     ·
     <a href="https://github.com/pranavbaburaj/polyglot/issues">Report a Bug</a>
     ·
@@ -25,7 +25,10 @@
     <img src="https://badges.frapsoft.com/os/v1/open-source.svg?v=103">
     <img src="https://img.shields.io/github/last-commit/pranavbaburaj/polyglot">
     <a href="https://twitter.com/intent/tweet?text=Find%20the%20percentage%20of%20programming%20languages%20in%20your%20project&url=https://github.com/pranavbaburaj/polyglot&via=baburaj_pranav&hashtags=developers,polyglot,language"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
+    <img src="https://tokei.rs/b1/github/pranavbaburaj/polyglot">
   </p>
+
+
   <br />
 
 </p>
@@ -55,7 +58,7 @@ Find the percentage of programming languages used in your project
 
 ## ⚡ Getting Started
 
-In order to get started, please install pip.
+In order to get started, please install `pip`.
 
 ### 📝 Prerequisites
 
@@ -64,6 +67,7 @@ In order to get started, please install pip.
 ```sh
 sudo apt-get install python3-pip
 ```
+> Learn more about pip [here](https://pip.pypa.io/en/stable/installing/)
 
 ### ⬇️ Installation
 
@@ -124,9 +128,9 @@ polyglot.show(display=True)
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
+Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-1. Fork the Project
+1. [Fork](https://github.com/pranavbaburaj/polyglot/fork) the Project
 2. Create your Feature Branch (`git checkout -b feature`)
 3. Commit your Changes (`git commit -m 'Add some features'`)
 4. Push to the Branch (`git push origin feature`)
@@ -136,7 +140,7 @@ Contributions are what make the open source community such an amazing place to b
 
 ## 📰 License
 
-Distributed under the MIT license. See `LICENSE` for more information.
+Distributed under the MIT license. See [`LICENSE`](https://github.com/pranavbaburaj/polyglot/blob/main/LICENSE) for more information.
 
 <!-- CONTACT -->
 
