@@ -5,6 +5,7 @@ from collections.abc import Iterable
 
 from polyglot.path import DirectoryError
 
+
 class _ExtensionsionType():
     required_type = Iterable
 
@@ -13,11 +14,24 @@ class _ExtensionsionType():
         self.check_value_type(self.value)
 
     def check_value_type(self, value):
+        """
+        Make sure that the key value is an
+        iterable, either a tuple, list, string
+        or dictionary
+
+        Args:
+            value (any): The value to check the type of
+
+        Raises:
+            TypeError: Raises a TypeError when the value is not
+            an iterable
+        """
         if not isinstance(value, self.required_type):
             raise TypeError(colored.red(f"{value} not an iterable"))
 
     def __repr__(self):
         return self.value
+
 
 class ExtensionMap(object):
     def __init__(self, extensions={}):
@@ -65,6 +79,15 @@ class ExtensionMap(object):
     def get(self):
         return self.extensions
 
+    def __repr__(self):
+        return str(self.extensions)
+
+    def __str__(self):
+        return self.__repr__()
+
+    def __len__(self):
+        return len(self.extensions)
+
 
 class _Prompt(object):
     def __init__(self, prompt, options, require=True):
@@ -78,6 +101,7 @@ class _Prompt(object):
             data = input(f"{self.prompt} (y/n) ")
         return data == "y"
 
+
 class _Logs(object):
     def __init__(self, log):
         self.log_messages = log
@@ -88,6 +112,7 @@ class _Logs(object):
         if self.log_messages:
             self.counter += 1
             print(color(f"LOG[{self.counter}] {message}"))
+
 
 class Beautify(object):
     def __init__(self, directory, extensions, prompt=True, log=True):
@@ -122,12 +147,14 @@ class Beautify(object):
 
             path = os.path.join(self.directory, folder)
             move_location = os.path.join(path, filename)
-            
+
             if not os.path.exists(path) or not os.path.isdir(path):
-                os.mkdir(path)                
+                os.mkdir(path)
 
             shutil.move(os.path.join(self.directory, filename), move_location)
-            self.log.log(f"Moved Successfully [{os.path.join(self.directory, filename)} => {move_location}]")
+            self.log.log(
+                f"Moved Successfully [{os.path.join(self.directory, filename)} => {move_location}]"
+            )
 
     def __get_extension_folder(self, extension, data):
         for foldername in data:
