@@ -1,4 +1,5 @@
 import os
+import shutil
 
 from polyglot.path import DirectoryError
 
@@ -86,7 +87,25 @@ class Beautify(object):
         replace_files = {}
         data = self.extensions.get()
         for filename in os.listdir(self.directory):
-            pass
+            folder = self.__get_extension_folder(filename, data)
+            if not folder:
+                continue
+
+            path = os.path.join(self.directory, folder)
+            move_location = os.path.join(path, filename)
+            
+            if not os.path.exists(path) or not os.path.isdir(path):
+                os.mkdir(path)                
+
+            shutil.move(os.path.join(self.directory, filename), move_location)
+
+    def __get_extension_folder(self, extension, data):
+        for foldername in data:
+            extension_list = data[foldername]
+            for file_extension in extension_list:
+                if extension.endswith(file_extension):
+                    return foldername
+        return None
 
     def __is_directory(self, directory):
         is_directory = os.path.isdir(directory)
