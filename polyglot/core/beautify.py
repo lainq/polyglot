@@ -1,5 +1,6 @@
 import os
 import shutil
+from clint.textui import colored
 
 from polyglot.path import DirectoryError
 
@@ -60,15 +61,26 @@ class _Prompt(object):
             data = input(f"{self.prompt} (y/n) ")
         return data == "y"
 
+class _Logs(object):
+    def __init__(self, log):
+        self.log_messages = log
+        self.counter = 0
+
+    def log(self, message, critical=False):
+        color = colored.red if critical else colored.green
+        if self.log_messages:
+            self.counter += 1
+            print(color(f"LOG[{self.counter}] {message}"))
 
 class Beautify(object):
-    def __init__(self, directory, extensions, prompt=True):
+    def __init__(self, directory, extensions, prompt=True, log=True):
         assert isinstance(
             extensions,
             ExtensionMap), "extensions expected to be an extension map"
 
         self.directory = self.__is_directory(directory)
         self.extensions = extensions
+        self.log = _Logs(log)
 
         self.clean_directory(prompt)
 
@@ -98,6 +110,7 @@ class Beautify(object):
                 os.mkdir(path)                
 
             shutil.move(os.path.join(self.directory, filename), move_location)
+            self.log.log(f"Moved Successfully [{os.path.join(self.directory, filename)} => {move_location}]")
 
     def __get_extension_folder(self, extension, data):
         for foldername in data:
