@@ -70,7 +70,6 @@ class EnvParser(object):
         if len(self.source) == 0 or self.source.startswith(Tokens.COMMENT_TOKEN):
             return []
 
-        print(self.source)
 
         assignment_counts = self.source.count("=")
         if assignment_counts > 1 or assignment_counts == 0:
@@ -78,6 +77,12 @@ class EnvParser(object):
         
         name, value = self.source.split("=")
         token_type = find_token_type(value)
+        existing_variables = list(filter(
+            lambda list_element : list_element.variable == name,
+            self.tokens
+        ))
+        if not len(existing_variables) == 0:
+            raise InvalidVariableName(f"Duplicate variable name {name}", self.line_number)
         token = EnvironmentVariable(name, value, token_type, self.line_number)
         self.tokens.append(token)
 
@@ -97,10 +102,16 @@ class Env(object):
 
     def load(self):
         data = self.__read(self.env).split("\n")
+        tokens = []
         for line_number in range(len(data)):
             parser = EnvParser(data[line_number], line_number)
-            tokens = parser.create_parser_tokens()
-            print(tokens)
+            token_data = parser.create_parser_tokens()
+            for token_element in token_data:
+                tokens.append(token_element)
+        
+        for token_element in tokens:
+            os.environ.setdefault(token_element.variable, token_element.value)
+        
 
     def __read(self, filename):
         if not os.path.exists(filename) and os.path.isfile(filename):
