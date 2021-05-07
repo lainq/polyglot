@@ -26,6 +26,7 @@
     <img src="https://img.shields.io/github/last-commit/pranavbaburaj/polyglot">
     <a href="https://twitter.com/intent/tweet?text=Find%20the%20percentage%20of%20programming%20languages%20in%20your%20project&url=https://github.com/pranavbaburaj/polyglot&via=baburaj_pranav&hashtags=developers,polyglot,language"><img src="https://img.shields.io/twitter/url/http/shields.io.svg?style=social"></a>
     <img src="https://tokei.rs/b1/github/pranavbaburaj/polyglot">
+    <img src="https://api.codacy.com/project/badge/Grade/601da323f4ea482f9c2ee7f4164e8ee9">
   </p>
 
 
@@ -37,7 +38,6 @@
 
 ## Table of Contents
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/601da323f4ea482f9c2ee7f4164e8ee9)](https://app.codacy.com/gh/pranavbaburaj/polyglot?utm_source=github.com&utm_medium=referral&utm_content=pranavbaburaj/polyglot&utm_campaign=Badge_Grade_Settings)
 
 - 📑 [Table of Contents](#table-of-contents)
 - 🙉 [About The Project](#-about-the-project)
