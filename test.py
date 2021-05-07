@@ -1,6 +1,3 @@
-from polyglot.core.beautify import Beautify, ExtensionMap
-import os
+from polyglot.ext.env import Env
 
-# "C:\Users\user\Pictures
-b = Beautify(os.path.join("C:", "Users", "user", "Pictures"),
-             ExtensionMap({"tetsing_ruby_files": []}))
+data = Env().load()
