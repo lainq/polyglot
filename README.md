@@ -28,7 +28,6 @@
     <img src="https://tokei.rs/b1/github/pranavbaburaj/polyglot">
   </p>
 
-
   <br />
 
 </p>
@@ -67,6 +66,7 @@ In order to get started, please install `pip`.
 ```sh
 sudo apt-get install python3-pip
 ```
+
 > Learn more about pip [here](https://pip.pypa.io/en/stable/installing/)
 
 ### ⬇️ Installation
