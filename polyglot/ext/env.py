@@ -2,22 +2,44 @@ import os
 
 from clint.textui import colored
 
+def find_token_type(value):
+    if value.isdigit():
+        return (int, float)
+    
+    return (str)
+
 class EnvAssignmentError(Exception):
     def __init__(self, error, line_number):
         self.message = error.strip()
         self.line = line_number
 
-        error_message = colored.red(f"{self.message} [LINE:{self.line}]")
+        error_message = colored.red(f"{self.message} at line {self.line}")
         super().__init__(error_message)
+
+class InvalidVariableName(EnvAssignmentError):
+    def __init__(self, message, line):
+        super().__init__(message, line)
 
 class Tokens(object):
     COMMENT_TOKEN = "#"
 
 class EnvironmentVariable(object):
     def __init__(self, variable, value, token_type, line_number):
-        self.variable = variable
+        self.line = line_number
+
+        self.variable = self.__check_variable_name(variable)
         self.value = value
         self.token_type = token_type
+
+    def __check_variable_name(self, name):
+        if len(name) == 0:
+            raise InvalidVariableName(f"Invalid variable name {name}", self.line)
+        first = name[0]
+        if first.isdigit():
+            raise InvalidVariableName(f"Variable name {name} starts with a number", self.line)
+
+        return name
+
 
 class EnvParserPosition(object):
     def __init__(self, position=0):
@@ -51,10 +73,15 @@ class EnvParser(object):
         print(self.source)
 
         assignment_counts = self.source.count("=")
-        if assignment_counts > 1:
-            raise EnvAssignmentError("Multiple assignments in the same line", self.line_number)
-
+        if assignment_counts > 1 or assignment_counts == 0:
+            raise EnvAssignmentError("Multiple or no assignments ", self.line_number)
         
+        name, value = self.source.split("=")
+        token_type = find_token_type(value)
+        token = EnvironmentVariable(name, value, token_type, self.line_number)
+        self.tokens.append(token)
+
+        return self.tokens
 
     def update(self):
         self.position.increment(1)
@@ -72,7 +99,8 @@ class Env(object):
         data = self.__read(self.env).split("\n")
         for line_number in range(len(data)):
             parser = EnvParser(data[line_number], line_number)
-            parser.create_parser_tokens()
+            tokens = parser.create_parser_tokens()
+            print(tokens)
 
     def __read(self, filename):
         if not os.path.exists(filename) and os.path.isfile(filename):
