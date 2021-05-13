@@ -1,5 +1,4 @@
-from polyglot.ext.env import Env
-import os
-data = Env().load()
+from polyglot.ext.dir import directory
 
-print(os.environ.get('hehe'))
+data = directory(".", display=True)
+# print(data)
