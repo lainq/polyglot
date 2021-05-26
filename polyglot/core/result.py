@@ -20,16 +20,17 @@ class Result(object):
         length = sum([len(data[key]) for key in data])
         for file_type in data:
             self.data["files"][file_type] = {
-                "data":
-                f"{round((len(data[file_type]) / length) * 100, 2)} %",
-                "total":
-                len(data[file_type]),
-                "blank":
-                len(
-                    Ignore.remove_specific_list_element([
-                        os.path.getsize(filename) == 0
-                        for filename in data[file_type]
-                    ], [False]))
+                "data": f"{round((len(data[file_type]) / length) * 100, 2)} %",
+                "total": len(data[file_type]),
+                "blank": len(
+                    Ignore.remove_specific_list_element(
+                        [
+                            os.path.getsize(filename) == 0
+                            for filename in data[file_type]
+                        ],
+                        [False],
+                    )
+                ),
             }
 
     def __find_by_lines(self, data):
@@ -57,5 +58,5 @@ class Result(object):
             self.data["lines"][line_key] = {
                 "data": f"{round((lines[line_key] / total_lines) * 100, 2)} %",
                 "total": lines.get(line_key),
-                "blank": empty.get(line_key)
+                "blank": empty.get(line_key),
             }

@@ -8,8 +8,7 @@ LANGUAGE_FILE = "https://raw.githubusercontent.com/github/linguist/master/lib/li
 
 
 def validate_argument_types(values, types, message):
-    assert len(values) == len(
-        types), "Values and types should have the same length"
+    assert len(values) == len(types), "Values and types should have the same length"
     for index in range(len(values)):
         assert isinstance(values[index], types[index]), str(message)
     return True
@@ -17,14 +16,12 @@ def validate_argument_types(values, types, message):
 
 def install_files(read_url, write_file_dir, filename, extension):
     assert isinstance(read_url, str), "Read url expected to be a string"
-    assert isinstance(write_file_dir,
-                      str), "Write path expected to be a string"
+    assert isinstance(write_file_dir, str), "Write path expected to be a string"
 
     filename = os.path.join(write_file_dir, f"{filename}.{extension}")
     try:
         with open(filename, "wb") as file_writer:
-            file_writer.write(
-                requests.get(read_url, allow_redirects=True).content)
+            file_writer.write(requests.get(read_url, allow_redirects=True).content)
     except Exception as exception:
         raise Exception
 
@@ -41,7 +38,8 @@ class Extensions(object):
         self.languages = {}
 
         self.content = self.remove_unwanted_keys(
-            self.__create_language_file(self.language_detection_file)[0])
+            self.__create_language_file(self.language_detection_file)[0]
+        )
 
     def get_extension_data(self):
         return self.__split_files(self.filenames, self.content)
@@ -50,7 +48,7 @@ class Extensions(object):
         """
         Loop through each file in the files array
         and determine the language with the help of
-        the language extension 
+        the language extension
         """
         for filename in files:
             language = self.__find_language_name(filename, content)
@@ -73,7 +71,7 @@ class Extensions(object):
 
     def remove_unwanted_keys(self, file_content):
         """
-        Remove all the unwanted keys from the 
+        Remove all the unwanted keys from the
         file_content dictionary and only keep
         the 'extensions' key
         """
@@ -93,11 +91,12 @@ class Extensions(object):
         and return the file_content along with the number of lines
         """
         if language_file is not None and isinstance(language_file, str):
-            if not language_file.endswith(
-                    ".yml") and not language_file.endswith(
-                        ".json") and not language_file.endswith(".yaml"):
-                raise Exception(
-                    "Language file expected to be a yaml or json file")
+            if (
+                not language_file.endswith(".yml")
+                and not language_file.endswith(".json")
+                and not language_file.endswith(".yaml")
+            ):
+                raise Exception("Language file expected to be a yaml or json file")
 
             if language_file.endswith(".json"):
                 filename = LanguageJSON(language_file).convert_to_yaml()
@@ -106,7 +105,8 @@ class Extensions(object):
                 return Extensions.read_file_data(language_file, True)
 
         return Extensions.read_file_data(
-            install_files(LANGUAGE_FILE, os.getcwd(), "language", "yml"), True)
+            install_files(LANGUAGE_FILE, os.getcwd(), "language", "yml"), True
+        )
 
     @staticmethod
     def read_file_data(filename, is_yaml=False):

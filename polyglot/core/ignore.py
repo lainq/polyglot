@@ -99,13 +99,13 @@ class Ignore(object):
         """
         Valiate a file and read the file
         """
-        if not os.path.exists(read_file_name) or not os.path.isfile(
-                read_file_name):
+        if not os.path.exists(read_file_name) or not os.path.isfile(read_file_name):
             raise IgnoreFileError(f"{read_file_name} is not a valid file")
 
         if ignore_text and not read_file_name.endswith(".polyglot"):
             raise PolyglotExtensionError(
-                f"Ignore files require to have a .polyglot file extension")
+                f"Ignore files require to have a .polyglot file extension"
+            )
 
         with open(read_file_name, "r") as file_reader:
             file_data = file_reader.read().split("\n")
@@ -114,8 +114,12 @@ class Ignore(object):
                 return file_data
 
             return Ignore.remove_specific_list_element(
-                [(filename if len(filename.strip()) > 0 else None)
-                 for filename in file_data], [None])
+                [
+                    (filename if len(filename.strip()) > 0 else None)
+                    for filename in file_data
+                ],
+                [None],
+            )
 
     @staticmethod
     def remove_specific_list_element(list_data, remove_element):

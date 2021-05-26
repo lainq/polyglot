@@ -8,7 +8,7 @@ from polyglot.core.result import Result
 from polyglot.core.display import Display
 from polyglot.core.ignore import Ignore
 
-from polyglot.exceptions.exceptions import (PolyglotFileNotFoundError)
+from polyglot.exceptions.exceptions import PolyglotFileNotFoundError
 
 
 class Polyglot(object):
@@ -23,9 +23,11 @@ class Polyglot(object):
         files -- All the files inside of the directory
 
     """
+
     def __init__(self, directory_name: str, ignore=None):
         assert ignore == None or isinstance(
-            ignore, str), "Expected to be a string or None"
+            ignore, str
+        ), "Expected to be a string or None"
         self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
         self.files = self.find_directory_files(self.directory)
@@ -33,15 +35,15 @@ class Polyglot(object):
         if self.ignore:
             self.files = Ignore.remove_specific_list_element(
                 self.files,
-                Ignore(self.ignore).create_ignore_files(
-                    self.files, self.directory))
+                Ignore(self.ignore).create_ignore_files(self.files, self.directory),
+            )
 
     @staticmethod
     def find_directory_path(directory_path: str):
         """
         Determine the directory path based on
         the parameter. If the path is a dot(.) return the
-        current working directory, else return 
+        current working directory, else return
         the path if the path is a directory, else
         throw an error
         """
@@ -59,9 +61,7 @@ class Polyglot(object):
         Make sure that the root of the file
         is not hidden
         """
-        hidden_root = [
-            str(filepath).startswith(hidden_file) for hidden_file in hidden
-        ]
+        hidden_root = [str(filepath).startswith(hidden_file) for hidden_file in hidden]
         return True in hidden_root
 
     def find_directory_files(self, directory):
@@ -74,25 +74,20 @@ class Polyglot(object):
         for (root, dirs, files) in os.walk(directory, topdown=True):
             if not self.__find_hidden_files(hidden_directories, root):
                 for filename in files:
-                    if filename.startswith(os.path.join(
-                            self.directory, ".git")):
+                    if filename.startswith(os.path.join(self.directory, ".git")):
                         continue
                     filenames.append(os.path.join(root, filename))
 
         return filenames
 
-    def show(self,
-             language_detection_file=None,
-             display=True,
-             fmt=None,
-             output=None):
+    def show(self, language_detection_file=None, display=True, fmt=None, output=None):
         DEFAULT_LANGUAGE_DETECTION_FILE = "language.yml"
         if language_detection_file is None:
             for filename in os.listdir(os.getcwd()):
                 if filename == DEFAULT_LANGUAGE_DETECTION_FILE and os.path.isfile(
-                        filename):
-                    language_detection_file = os.path.join(
-                        os.getcwd(), filename)
+                    filename
+                ):
+                    language_detection_file = os.path.join(os.getcwd(), filename)
                     break
 
         extensions = Extensions(language_detection_file, display, self.files)
@@ -102,11 +97,11 @@ class Polyglot(object):
         if display and fmt is None:
             display_text = Display(result)
         elif display and fmt is not None:
-            if fmt.lower() == 'l':
-                result['files'] = {}
+            if fmt.lower() == "l":
+                result["files"] = {}
                 display_text = Display(result)
-            elif fmt.lower() == 'f':
-                result['lines'] = {}
+            elif fmt.lower() == "f":
+                result["lines"] = {}
                 display_text = Display(result)
 
         if isinstance(output, str):

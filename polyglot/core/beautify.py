@@ -6,7 +6,7 @@ from collections.abc import Iterable
 from polyglot.path import DirectoryError
 
 
-class _ExtensionsionType():
+class _ExtensionsionType:
     required_type = Iterable
 
     def __init__(self, placeholder):
@@ -41,7 +41,7 @@ class ExtensionMap(object):
 
     def __add_all_extensions(self, extensions):
         """
-        Add all the extensions from the dict passed 
+        Add all the extensions from the dict passed
         in as a parameter
 
         Args:
@@ -117,8 +117,8 @@ class _Logs(object):
 class Beautify(object):
     def __init__(self, directory, extensions, prompt=True, log=True):
         assert isinstance(
-            extensions,
-            ExtensionMap), "extensions expected to be an extension map"
+            extensions, ExtensionMap
+        ), "extensions expected to be an extension map"
 
         self.directory = self.__is_directory(directory)
         self.extensions = extensions
@@ -128,8 +128,9 @@ class Beautify(object):
 
     def clean_directory(self, prompt):
         if prompt:
-            data = _Prompt("Do you want to clear the directory",
-                           ["y", "n"]).create_prompt()
+            data = _Prompt(
+                "Do you want to clear the directory", ["y", "n"]
+            ).create_prompt()
             if data:
                 self.__clean()
 

@@ -14,7 +14,7 @@ class Display(object):
 
     def display_output(self):
         """
-        Verify the dict elements to be dicts 
+        Verify the dict elements to be dicts
         and then continue to print out
         the dict data in tabular form using
         prettytable.
@@ -27,7 +27,9 @@ class Display(object):
                 table = PrettyTable()
                 table.field_names = [
                     "Language",
-                    display_text_type.capitalize(), "Total", "Blank"
+                    display_text_type.capitalize(),
+                    "Total",
+                    "Blank",
                 ]
 
                 for data in self.text[display_text_type]:
@@ -36,14 +38,12 @@ class Display(object):
                         data,
                         current_data.get("data"),
                         current_data.get("total"),
-                        current_data.get("blank")
+                        current_data.get("blank"),
                     ]
 
                     table.add_rows([current_row])
                 print(colored.yellow(table))
 
     def verify_text(self):
-        assert isinstance(self.text["files"],
-                          dict), "Files expected to be a dict"
-        assert isinstance(self.text["lines"],
-                          dict), "lines expected to be a dict"
+        assert isinstance(self.text["files"], dict), "Files expected to be a dict"
+        assert isinstance(self.text["lines"], dict), "lines expected to be a dict"

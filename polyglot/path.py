@@ -9,6 +9,7 @@ class DirectoryError(Exception):
 
         super().__init__(self.error_message)
 
+
 class FileContentFilter(object):
     def __init__(self, files=None, folders=None):
         self.__validate_parameter_types(files=files, folders=folders)
@@ -22,19 +23,16 @@ class FileContentFilter(object):
             if not type(value) == valid_types:
                 if value == None:
                     continue
-                raise TypeError(
-                    f"{parameter_key} expected to be of type bool or None"
-                )
+                raise TypeError(f"{parameter_key} expected to be of type bool or None")
         return True
-        
+
 
 class Log(object):
     def __init__(self, message, critical=False):
-        self.message = colored.red(message) if critical else colored.cyan(
-            message)
+        self.message = colored.red(message) if critical else colored.cyan(message)
         self.create_message_log(self.message)
 
-    def create_message_log(self, message, end='\n'):
+    def create_message_log(self, message, end="\n"):
         print(message, end=end)
 
 
@@ -49,13 +47,15 @@ class _Stat(object):
         self.absolute = os.path.abspath(path)
 
     def __repr__(self):
-        return str({
-            "parent": self.parent,
-            "basename": self.basename,
-            "directory": self.directory,
-            "file": self.file,
-            "abs": self.absolute
-        })
+        return str(
+            {
+                "parent": self.parent,
+                "basename": self.basename,
+                "directory": self.directory,
+                "file": self.file,
+                "abs": self.absolute,
+            }
+        )
 
     def __str__(self):
         return self.__repr__()
@@ -87,12 +87,14 @@ class PolyglotPath(object):
         return os.path.isdir(self.directory)
 
     def touch(self, create_files=[], log=True):
-        assert isinstance(create_files,
-                          Iterable), "Parameter expected to be an iterable"
+        assert isinstance(
+            create_files, Iterable
+        ), "Parameter expected to be an iterable"
 
         for index, filename in enumerate(create_files):
-            with open(os.path.join(self.directory, filename),
-                      "w") as create_file_writer:
+            with open(
+                os.path.join(self.directory, filename), "w"
+            ) as create_file_writer:
                 create_file_writer.write("")
 
             log = Log(f"{index+1} Created {filename}")
@@ -102,7 +104,7 @@ class PolyglotPath(object):
 
         for index, dirname in enumerate(directories):
             if os.path.exists(dirname) and os.path.isdir(dirname):
-                Log(f'{index+1} Failed to create {dirname}', critical=True)
+                Log(f"{index+1} Failed to create {dirname}", critical=True)
             else:
                 os.mkdir(dirname)
                 Log(f"{index+1}. Created {dirname}")

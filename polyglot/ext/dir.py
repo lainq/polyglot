@@ -13,10 +13,14 @@ class _Directory(object):
         table = prettytable.PrettyTable()
         table.field_names = ["Modified at", "label", "size", "path"]
         for key in data:
-            table.add_row([
-                data[key].get("modified"), data[key].get("label"),
-                data[key].get("size"), key
-            ])
+            table.add_row(
+                [
+                    data[key].get("modified"),
+                    data[key].get("label"),
+                    data[key].get("size"),
+                    key,
+                ]
+            )
 
         if self.show:
             print(table)
@@ -32,7 +36,8 @@ class _Directory(object):
             filename = files[file_index]
             data.setdefault(
                 os.path.basename(filename),
-                self.__generate_data(os.path.join(self.path, filename)))
+                self.__generate_data(os.path.join(self.path, filename)),
+            )
 
         return data
 
@@ -40,8 +45,7 @@ class _Directory(object):
         return {
             "modified": time.ctime(os.path.getmtime(path)),
             "label": "<DIR>" if os.path.isdir(path) else "",
-            "size":
-            self.__get_file_length(path) if os.path.isfile(path) else ""
+            "size": self.__get_file_length(path) if os.path.isfile(path) else "",
         }
 
     def __get_file_length(self, path):

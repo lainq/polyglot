@@ -7,7 +7,7 @@ def find_token_type(value):
     if value.isdigit():
         return (int, float)
 
-    return (str)
+    return str
 
 
 class EnvAssignmentError(Exception):
@@ -38,12 +38,12 @@ class EnvironmentVariable(object):
 
     def __check_variable_name(self, name):
         if len(name) == 0:
-            raise InvalidVariableName(f"Invalid variable name {name}",
-                                      self.line)
+            raise InvalidVariableName(f"Invalid variable name {name}", self.line)
         first = name[0]
         if first.isdigit():
             raise InvalidVariableName(
-                f"Variable name {name} starts with a number", self.line)
+                f"Variable name {name} starts with a number", self.line
+            )
 
         return name
 
@@ -75,23 +75,22 @@ class EnvParser(object):
         self.character = self.position.current_character(self.source)
 
     def create_parser_tokens(self):
-        if len(self.source) == 0 or self.source.startswith(
-                Tokens.COMMENT_TOKEN):
+        if len(self.source) == 0 or self.source.startswith(Tokens.COMMENT_TOKEN):
             return []
 
         assignment_counts = self.source.count("=")
         if assignment_counts > 1 or assignment_counts == 0:
-            raise EnvAssignmentError("Multiple or no assignments ",
-                                     self.line_number)
+            raise EnvAssignmentError("Multiple or no assignments ", self.line_number)
 
         name, value = self.source.split("=")
         token_type = find_token_type(value)
         existing_variables = list(
-            filter(lambda list_element: list_element.variable == name,
-                   self.tokens))
+            filter(lambda list_element: list_element.variable == name, self.tokens)
+        )
         if not len(existing_variables) == 0:
-            raise InvalidVariableName(f"Duplicate variable name {name}",
-                                      self.line_number)
+            raise InvalidVariableName(
+                f"Duplicate variable name {name}", self.line_number
+            )
         token = EnvironmentVariable(name, value, token_type, self.line_number)
         self.tokens.append(token)
 
@@ -106,8 +105,7 @@ class Env(object):
     defualt_filename = os.path.join(os.getcwd(), ".env")
 
     def __init__(self, env=None, load=True):
-        assert isinstance(
-            env, str) or env == None, "Unexpected type of parameter env"
+        assert isinstance(env, str) or env == None, "Unexpected type of parameter env"
         self.env = env or self.defualt_filename
         self.load_to_process = load
 

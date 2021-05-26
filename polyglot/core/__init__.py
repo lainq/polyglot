@@ -24,4 +24,3 @@ SOFTWARE.
 """
 
 from .polyglot import Polyglot
-

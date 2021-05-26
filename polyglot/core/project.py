@@ -13,8 +13,8 @@ class ProjectFiles(object):
 class Project(object):
     def __init__(self, project_name, project_files, polyglot=False):
         assert isinstance(
-            project_files,
-            ProjectFiles), "Parameter expected to be of type ProjectFiles"
+            project_files, ProjectFiles
+        ), "Parameter expected to be of type ProjectFiles"
         self.name = project_name
         self.files = project_files
         self.polyglot = polyglot
@@ -40,8 +40,9 @@ class Project(object):
 
     def __create_project_files(self, directory):
         for filename in self.files.files:
-            self.write_file_data(os.path.join(directory, filename),
-                                 self.files.files.get(filename))
+            self.write_file_data(
+                os.path.join(directory, filename), self.files.files.get(filename)
+            )
 
         for folder in self.files.folders:
             if not os.path.isdir(folder):
@@ -49,16 +50,16 @@ class Project(object):
 
         if self.polyglot:
             polyglot = Polyglot(directory, "ignore.polyglot")
-            polyglot.show(display=False,
-                          output=os.path.join(directory, "polyglot.json"))
+            polyglot.show(
+                display=False, output=os.path.join(directory, "polyglot.json")
+            )
 
     def write_file_data(self, filename, data=""):
         with open(filename, "w") as file_writer:
             file_writer.write(data)
 
     def __directory_path(self, project_name):
-        assert isinstance(project_name,
-                          str), "Porject name expected to be a string"
+        assert isinstance(project_name, str), "Porject name expected to be a string"
         if project_name == ".":
             return os.getcwd()
 

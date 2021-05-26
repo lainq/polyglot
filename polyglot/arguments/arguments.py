@@ -18,6 +18,7 @@ class Arguments(object):
         position -- The lexer postion
 
     """
+
     def __init__(self, arguments=None, return_value=False):
         self.arguments = sys.argv[1:] if not arguments else arguments
         self.return_value = return_value
@@ -32,12 +33,7 @@ class Arguments(object):
         assert isinstance(self.arguments, list)
         valid_flags = ["--dir", "--o", "--show", "--ignore"]
 
-        parameters = {
-            "dir": os.getcwd(),
-            "o": None,
-            "show": str(True),
-            "ignore": ""
-        }
+        parameters = {"dir": os.getcwd(), "o": None, "show": str(True), "ignore": ""}
 
         current_character = self.position.current_character(self.arguments)
         while current_character is not None:
@@ -45,21 +41,24 @@ class Arguments(object):
                 exception = PolyglotException(
                     f"{current_character} is not recogonised as a valid parmeter",
                     f"Try again with valid parameters",
-                    fatal=False)
+                    fatal=False,
+                )
                 return None
             character_key = current_character[2:]
             if "=" not in character_key:
                 exception = PolyglotException(
                     f"User equal-to(=) to add value to parameters",
                     f"Try again with valid values",
-                    fatal=False)
+                    fatal=False,
+                )
                 return None
 
             if character_key.count("=") > 1:
                 exception = PolyglotException(
                     f"More than one assignments for the same parameter",
                     f"Try again with valid values",
-                    fatal=False)
+                    fatal=False,
+                )
                 return None
 
             data = character_key.split("=")
@@ -93,9 +92,9 @@ class Arguments(object):
 
     def validate_parameters(self, parameters):
         if parameters["show"] not in [str(True), str(False)]:
-            exception = PolyglotException("Invalid value for paramter show",
-                                          "Try again",
-                                          fatal=False)
+            exception = PolyglotException(
+                "Invalid value for paramter show", "Try again", fatal=False
+            )
             return None
 
         parameters["show"] = bool(parameters["show"])

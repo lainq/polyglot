@@ -12,14 +12,19 @@ class UnknownPathError(FileNotFoundError):
 
 
 class Tree(object):
-    space = '    '
-    branch = '│   '
-    tree = '├── '
-    last = '└── '
+    space = "    "
+    branch = "│   "
+    tree = "├── "
+    last = "└── "
 
     def __init__(self, directory):
-        self.directory = directory if self.__verify_directory_path(
-            os.getcwd() if directory == "." else directory) else None
+        self.directory = (
+            directory
+            if self.__verify_directory_path(
+                os.getcwd() if directory == "." else directory
+            )
+            else None
+        )
 
     def __verify_directory_path(self, directory):
         if not os.path.exists(directory) or not os.path.isdir(directory):
@@ -27,16 +32,13 @@ class Tree(object):
 
         return True
 
-    def generate(self,
-                 level=-1,
-                 limit_to_directories=False,
-                 length_limit=None):
+    def generate(self, level=-1, limit_to_directories=False, length_limit=None):
         if not self.directory:
             raise UnknownPathError(f"Cannot find {self.directory}")
 
         path = pathlib.Path(self.directory)
 
-        def inner(dir_path: pathlib.Path, prefix: str = '', level=-1):
+        def inner(dir_path: pathlib.Path, prefix: str = "", level=-1):
             if not level:
                 return
             if limit_to_directories:
@@ -51,9 +53,7 @@ class Tree(object):
                         continue
                     yield prefix + pointer + path.name
                     extension = self.branch if pointer == self.tree else self.space
-                    yield from inner(path,
-                                     prefix=prefix + extension,
-                                     level=level - 1)
+                    yield from inner(path, prefix=prefix + extension, level=level - 1)
                 elif not limit_to_directories:
                     yield prefix + pointer + path.name
 
@@ -63,4 +63,6 @@ class Tree(object):
         if next(iterator, None):
             print(
                 clint.textui.colored.red(
-                    f'... length_limit, {length_limit}, reached, counted:'))
+                    f"... length_limit, {length_limit}, reached, counted:"
+                )
+            )
