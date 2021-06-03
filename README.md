@@ -3,7 +3,7 @@
 <br />
 <p align="center">
   <img src="https://user-images.githubusercontent.com/70764593/114295267-c9cdb780-9ac1-11eb-94aa-f864328d6845.png" aly="logo">
-  <h3 align="center">Polyglot</h3>
+  <h3 align="center"><code>Polyglot</code></h3>
 
   <p align="center">
     Find the percentage of programming languages used in your project
