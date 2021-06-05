@@ -3,12 +3,24 @@ import os
 
 from clint.textui import colored
 
+from polyglot.core.polyglot import Polyglot
+
 COMMANDS = [
     "stats"
 ]
 
 class EventLogger(object):
-    pass
+    @staticmethod
+    def info(message):
+        print(colored.cyan(f"INFO:{message}"))
+    
+    @staticmethod
+    def warning(message):
+        print(colored.yellow(f"WARNING:{message}"))
+
+    @staticmethod
+    def error(message):
+        print(colored.red(f"ERROR:{message}"))
 
 class CommandLineException(object):
     def __init__(self, message, suggestion=None, fatal=True):
@@ -62,20 +74,42 @@ class LanguageStats(object):
     def __init__(self, parameters):
         self.directory = parameters.get("--dir") or os.getcwd()
         self.ignore = parameters.get("--ignore") or -1
+        self.language_file = None if (parameters.get("--detect") or None) == -2 else parameters.get("--detect")
+        self.fmt = parameters.get("--fmt")
+        self.output = parameters.get("--output") or None
+
+        if self.fmt not in ["l", "f", "L", "F"]:
+            self.fmt = None
+        else:
+            self.fmt = self.fmt.lower()
         
         if self.ignore == -2:
            self.ignore = self.__find_ignore_file()
         else:
             self.ignore = None
         
-        print(self.ignore)
+        try:
+            polyglot = Polyglot(self.directory, self.ignore)
+            polyglot.show(self.language_file, True, self.fmt, self.output)
+        except Exception as exception:
+            EventLogger.error(exception.__str__())
+            sys.exit(1)
 
     def __find_ignore_file(self):
         if not os.path.isdir(self.directory):
             _ = CommandLineException(f"{self.directory} is not a directory")
             return None
         files = list(filter(lambda current_element:current_element.endswith(".polyglot"), os.listdir(self.directory)))
-        print(files)
+        if len(files) == 0:
+            EventLogger.error(f"Could not find an ignore file in {self.directory}")
+            return None
+        
+        if len(files) > 1:
+            EventLogger.warning(f"Found {len(files)} ignore files")
+
+        ignore_filename = files[0]
+        EventLogger.info(f"{ignore_filename} is taken as the ignore file")
+        return ignore_filename
 
 def command_executor(results):
     command, params = results.command, results.parameters
