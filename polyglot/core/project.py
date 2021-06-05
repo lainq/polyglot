@@ -59,7 +59,7 @@ class Project(object):
             file_writer.write(data)
 
     def __directory_path(self, project_name):
-        assert isinstance(project_name, str), "Porject name expected to be a string"
+        assert isinstance(project_name, str), "Project name expected to be a string"
         if project_name == ".":
             return os.getcwd()
 

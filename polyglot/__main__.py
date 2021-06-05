@@ -1,11 +1,13 @@
 import sys
 import os
+import json
 
 from clint.textui import colored
 
 from polyglot.core.polyglot import Polyglot
+from polyglot.core.project import Project, ProjectFiles
 
-COMMANDS = ["stats"]
+COMMANDS = ["stats", "project"]
 
 
 class EventLogger(object):
@@ -122,10 +124,38 @@ class LanguageStats(object):
         return ignore_filename
 
 
+def search_for_manifest(manifest_filename):
+    filename = os.path.join(os.getcwd(), manifest_filename)
+    if not os.path.isfile(filename):
+        _ = CommandLineException(f"{manifest_filename} does not exist")
+    try:
+        with open(filename, "r") as file_reader:
+            return json.load(file_reader)
+    except Exception as exception:
+        CommandLineException(exception.__str__())
+
+
 def command_executor(results):
     command, params = results.command, results.parameters
     if command == "stats":
         _ = LanguageStats(params)
+    elif command == "project":
+        manifest_file = params.get("--manifest") or "manifest.json"
+        if manifest_file == -2:
+            manifest_file = "manifest.json"
+        manifest_data = search_for_manifest(manifest_file)
+
+        name, files, folders = (
+            manifest_data.get("name") or ".",
+            manifest_data.get("files") or {},
+            manifest_data.get("directories") or manifest_data.get("folders") or [],
+        )
+        try:
+            project = Project(name, ProjectFiles(files, folders))
+            project.create()
+        except Exception as ProjectException:
+            EventLogger.error(ProjectException.__str__())
+            sys.exit(1)
 
 
 def main():
