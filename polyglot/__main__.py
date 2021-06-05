@@ -5,15 +5,14 @@ from clint.textui import colored
 
 from polyglot.core.polyglot import Polyglot
 
-COMMANDS = [
-    "stats"
-]
+COMMANDS = ["stats"]
+
 
 class EventLogger(object):
     @staticmethod
     def info(message):
         print(colored.cyan(f"INFO:{message}"))
-    
+
     @staticmethod
     def warning(message):
         print(colored.yellow(f"WARNING:{message}"))
@@ -21,6 +20,7 @@ class EventLogger(object):
     @staticmethod
     def error(message):
         print(colored.red(f"ERROR:{message}"))
+
 
 class CommandLineException(object):
     def __init__(self, message, suggestion=None, fatal=True):
@@ -46,7 +46,7 @@ class ArgumentParser(object):
 
     def __init__(self, arguments):
         self.arguments = arguments
-        
+
     def create_argument_parser(self):
         command, parameters = None, {}
         for index, current in enumerate(self.arguments):
@@ -57,7 +57,7 @@ class ArgumentParser(object):
             if not current.startswith("--"):
                 exception = CommandLineException(
                     f"Invalid parameter {current}",
-                    f"Parameters should start with double hiphens "
+                    f"Parameters should start with double hiphens ",
                 )
 
             statement = current.split("=")
@@ -70,11 +70,16 @@ class ArgumentParser(object):
     def create_help_command(self):
         print("Help")
 
+
 class LanguageStats(object):
     def __init__(self, parameters):
         self.directory = parameters.get("--dir") or os.getcwd()
         self.ignore = parameters.get("--ignore") or -1
-        self.language_file = None if (parameters.get("--detect") or None) == -2 else parameters.get("--detect")
+        self.language_file = (
+            None
+            if (parameters.get("--detect") or None) == -2
+            else parameters.get("--detect")
+        )
         self.fmt = parameters.get("--fmt")
         self.output = parameters.get("--output") or None
 
@@ -82,12 +87,12 @@ class LanguageStats(object):
             self.fmt = None
         else:
             self.fmt = self.fmt.lower()
-        
+
         if self.ignore == -2:
-           self.ignore = self.__find_ignore_file()
+            self.ignore = self.__find_ignore_file()
         else:
             self.ignore = None
-        
+
         try:
             polyglot = Polyglot(self.directory, self.ignore)
             polyglot.show(self.language_file, True, self.fmt, self.output)
@@ -99,11 +104,16 @@ class LanguageStats(object):
         if not os.path.isdir(self.directory):
             _ = CommandLineException(f"{self.directory} is not a directory")
             return None
-        files = list(filter(lambda current_element:current_element.endswith(".polyglot"), os.listdir(self.directory)))
+        files = list(
+            filter(
+                lambda current_element: current_element.endswith(".polyglot"),
+                os.listdir(self.directory),
+            )
+        )
         if len(files) == 0:
             EventLogger.error(f"Could not find an ignore file in {self.directory}")
             return None
-        
+
         if len(files) > 1:
             EventLogger.warning(f"Found {len(files)} ignore files")
 
@@ -111,10 +121,12 @@ class LanguageStats(object):
         EventLogger.info(f"{ignore_filename} is taken as the ignore file")
         return ignore_filename
 
+
 def command_executor(results):
     command, params = results.command, results.parameters
     if command == "stats":
         _ = LanguageStats(params)
+
 
 def main():
     arguments = sys.argv[1:]
@@ -123,6 +135,7 @@ def main():
     if results.command not in COMMANDS:
         error = CommandLineException(f"Invalid command : {results.command}")
     command_executor(results)
+
 
 if __name__ == "__main__":
     main()

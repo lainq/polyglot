@@ -11,18 +11,18 @@ setuptools.setup(
     version="4.2.4",
     author="P Pranav Baburaj",
     author_email="code-roller@googlegroups.com",
-    description=
-    "Find the percentage of programming languages used in your project",
+    description="Find the percentage of programming languages used in your project",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/pranavbaburaj/polyglot",
     packages=setuptools.find_packages(
-        exclude=["tests", "*.tests", "*.tests.*", "tests.*"]),
+        exclude=["tests", "*.tests", "*.tests.*", "tests.*"]
+    ),
     install_requires=DEPENDENCIES,
     classifiers=[
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )
