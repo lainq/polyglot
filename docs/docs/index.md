@@ -57,6 +57,27 @@ The `show` method takes in two parameters, the language detection file as well a
 - language_detection_file(**optional**) - `string` The yaml file containing information about all the languages. By default, the `language_detection_file` is set to `None`. and the file is downloaded from the internet.
 - display(**optional**) - `bool` Whether to output the table on the console or not. The show method returns a dict containing information about the files.
 
+## `Tree`
+The `polyglot.core.tree` module helps us to generate a tree of the current directory
+```py
+from polyglot.core.tree import Tree
+
+tree = Tree("path/to/directory").generate()
+```
+
+```ps1
+├── colors.ts
+├── gists
+│   ├── gist.ts
+│   └── new.ts
+├── interface.ts
+├── json
+│   └── colors.json
+├── repos.ts
+└── user
+    └── user.ts
+```
+
 ## `Arguments`
 
 The `polyglot.arguments.Arguments` helps you parse a set of arguments and execute functions accordingly.
@@ -74,3 +95,42 @@ args.parse()
 
 - arguments(**optional**) - `list` The set of arguments. By default, the arguments in set to `sys.argv[1:]`.
 - return_value(**optional**) - `bool` Whether to return anything or not
+
+## `Project`
+The `polyglot.core.project.Project` is used to generate folders and files.
+
+To create a `Project` object
+```python
+from polyglot.core.project import Project, ProjectFiles
+
+# `.` for the current directory
+project = Project("project-name", ProjectFiles(
+  files=["file1", "dir1/file1"],
+  folders=["dir2", "some-unknown-folder"]
+))
+```
+To generate the directories
+```py
+project.create(clean=False)
+```
+The `create` function takes in the `clean` parameter which determines whether to clean the project directory if it already exists. The default value is set to `False`
+
+##  `polyglot.ext`
+
+### `Env`
+The `polyglot.ext.env.Env` helps to load variables defined in a `.env` into the process environment variables
+```py
+from polyglot.ext.env import Env
+env = Env()
+```
+
+### `directory` or `ls`
+The `polyglot.ext.dir` outputs something similar to an `ls` command in linux.
+```python
+from polyglot.ext.dir import directory, ls
+
+directory("path/to/folder")
+# or
+ls("path/to/folder")
+
+```
