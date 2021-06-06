@@ -7,8 +7,9 @@ from clint.textui import colored
 from polyglot.core.polyglot import Polyglot
 from polyglot.core.project import Project, ProjectFiles
 from polyglot.core.tree import Tree
+from polyglot.ext.dir import ls
 
-COMMANDS = ["stats", "project", "tree"]
+COMMANDS = ["stats", "project", "tree", "dir", "ls"]
 
 
 class EventLogger(object):
@@ -138,6 +139,12 @@ def search_for_manifest(manifest_filename):
 
 def command_executor(results):
     command, params = results.command, results.parameters
+    command_directory = params.get("--dir") or os.getcwd()
+    if command_directory == -2:
+        command_directory = os.getcwd()
+    if not os.path.isdir(command_directory):
+            EventLogger.error(f"{command_directory} is not a directory")
+            return None
     if command == "stats":
         _ = LanguageStats(params)
     elif command == "project":
@@ -171,6 +178,15 @@ def command_executor(results):
         except Exception as tree_exception:
             EventLogger.error(tree_exception.__str__())
             sys.exit(1)
+    elif command == "dir":
+        ls(command_directory)
+    elif command == "ls":
+        files = os.listdir(command_directory)
+        for filename in files:
+            current_path = os.path.join(command_directory, filename)
+            size = f"[size:{os.stat(current_path).st_size} bytes]"
+            color = colored.green if os.path.isfile(current_path) else colored.blue
+            print(f"{color(filename)} -> {colored.yellow(size)}")
 
 def main():
     arguments = sys.argv[1:]
