@@ -78,6 +78,10 @@ polyglot = Polyglot(dirname)
 polyglot.show(display=True)
 ```
 
+<br>
+<img src="https://github.com/pranavbaburaj/polyglot/blob/main/docs/polyglot-result.png?raw=true" height="450">
+
+<!--
 ```
 +-------------------------+---------+-------+-------+
 |         Language        |  Files  | Total | Blank |
@@ -104,6 +108,7 @@ polyglot.show(display=True)
 |           JSON          |  0.04 % |   5   |   0   |
 +-------------------------+---------+-------+-------+
 ```
+-->
 
 <!-- CONTRIBUTING -->
 
