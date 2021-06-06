@@ -6,8 +6,9 @@ from clint.textui import colored
 
 from polyglot.core.polyglot import Polyglot
 from polyglot.core.project import Project, ProjectFiles
+from polyglot.core.tree import Tree
 
-COMMANDS = ["stats", "project"]
+COMMANDS = ["stats", "project", "tree"]
 
 
 class EventLogger(object):
@@ -156,7 +157,20 @@ def command_executor(results):
         except Exception as ProjectException:
             EventLogger.error(ProjectException.__str__())
             sys.exit(1)
+    elif command == "tree":
+        directory = params.get("--dir") or os.getcwd()
+        if directory == -2:
+            directory = os.getcwd()
+        if not os.path.isdir(directory):
+            EventLogger.error(f"{directory} is not a directory")
+            return None
 
+        try:
+            tree = Tree(directory)
+            tree.generate()
+        except Exception as tree_exception:
+            EventLogger.error(tree_exception.__str__())
+            sys.exit(1)
 
 def main():
     arguments = sys.argv[1:]
