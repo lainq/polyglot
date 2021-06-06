@@ -125,6 +125,28 @@ class LanguageStats(object):
         EventLogger.info(f"{ignore_filename} is taken as the ignore file")
         return ignore_filename
 
+class ListDirectories(object):
+    def __init__(self, directory, only_dirs):
+        self.directory = directory
+        self.dirs = only_dirs
+
+        self.list_directory_content()
+
+    def list_directory_content(self):
+        for filename in self.content:
+            current_path = os.path.join(self.directory, filename)
+            size = f"[size:{os.stat(current_path).st_size} bytes]"
+            color = colored.green if os.path.isfile(current_path) else colored.blue
+            print(f"{color(filename)} -> {colored.yellow(size)}")
+
+    @property
+    def content(self):
+        return list(filter(self.file_filter_function, os.listdir(self.directory)))
+
+    def file_filter_function(self, filename):
+        if self.dirs:
+            return os.path.isdir(filename)
+        return True
 
 def search_for_manifest(manifest_filename):
     filename = os.path.join(os.getcwd(), manifest_filename)
@@ -181,12 +203,10 @@ def command_executor(results):
     elif command == "dir":
         ls(command_directory)
     elif command == "ls":
-        files = os.listdir(command_directory)
-        for filename in files:
-            current_path = os.path.join(command_directory, filename)
-            size = f"[size:{os.stat(current_path).st_size} bytes]"
-            color = colored.green if os.path.isfile(current_path) else colored.blue
-            print(f"{color(filename)} -> {colored.yellow(size)}")
+        dirs = ListDirectories(command_directory, params.get("--only-dirs"))
+        # files = os.listdir(command_directory)
+        # only_
+        # 
 
 def main():
     arguments = sys.argv[1:]
