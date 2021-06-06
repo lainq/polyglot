@@ -125,6 +125,7 @@ class LanguageStats(object):
         EventLogger.info(f"{ignore_filename} is taken as the ignore file")
         return ignore_filename
 
+
 class ListDirectories(object):
     def __init__(self, directory, only_dirs):
         self.directory = directory
@@ -148,6 +149,7 @@ class ListDirectories(object):
             return os.path.isdir(filename)
         return True
 
+
 def search_for_manifest(manifest_filename):
     filename = os.path.join(os.getcwd(), manifest_filename)
     if not os.path.isfile(filename):
@@ -165,8 +167,8 @@ def command_executor(results):
     if command_directory == -2:
         command_directory = os.getcwd()
     if not os.path.isdir(command_directory):
-            EventLogger.error(f"{command_directory} is not a directory")
-            return None
+        EventLogger.error(f"{command_directory} is not a directory")
+        return None
     if command == "stats":
         _ = LanguageStats(params)
     elif command == "project":
@@ -206,7 +208,8 @@ def command_executor(results):
         dirs = ListDirectories(command_directory, params.get("--only-dirs"))
         # files = os.listdir(command_directory)
         # only_
-        # 
+        #
+
 
 def main():
     arguments = sys.argv[1:]
