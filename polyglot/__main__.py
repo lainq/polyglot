@@ -1,6 +1,7 @@
 import sys
 import os
 import json
+import pathlib
 
 from clint.textui import colored
 
@@ -224,7 +225,10 @@ class Properties(object):
     def properties_command(self):
         print(colored.green(os.path.basename(self.path), bold=True), colored.yellow(f"[{self.file_type}]"))
         self.draw_seperator()
-        print(self.properties)
+
+        properties = self.properties
+        for property in properties:
+            print(colored.cyan(f"{property} -> "), colored.yellow(properties.get(property)))
 
     def draw_seperator(self):
         length = len(self.basename) + (len(self.file_type) + 3)
@@ -237,13 +241,19 @@ class Properties(object):
     def properties(self):
         return {
             "type" :  self.file_type,
-            "extension" : self.file_extension
+            "extension" : self.file_extension,
+            "parent" : self.find_file_path(pathlib.Path(self.path).parent.__str__()),
+            "size" : os.stat(self.path).st_size 
         }
 
     @property
     def file_extension(self):
+        if os.path.isdir(self.path):
+            return ''
         split_path = self.basename.split(".")
-        return split_path
+        if len(split_path[0]) == 0 or split_path[0] == self.basename:
+            return ''
+        return split_path[-1]
 
     @property
     def basename(self):
