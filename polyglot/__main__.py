@@ -206,17 +206,63 @@ def command_executor(results):
         ls(command_directory)
     elif command == "ls":
         dirs = ListDirectories(command_directory, params.get("--only-dirs"))
-        # files = os.listdir(command_directory)
-        # only_
-        #
 
+class Properties(object):
+    def __init__(self, path):
+        assert os.path.exists(path), f"{path} does not exist"
+        self.path = self.find_file_path(path)
+        self.properties_command()
+
+    def find_file_path(self, path):
+        if path == ".":
+            return os.getcwd()
+        elif path == "..":
+            return os.path.dirname(path)
+
+        return path
+
+    def properties_command(self):
+        print(colored.green(os.path.basename(self.path), bold=True), colored.yellow(f"[{self.file_type}]"))
+        self.draw_seperator()
+        print(self.properties)
+
+    def draw_seperator(self):
+        length = len(self.basename) + (len(self.file_type) + 3)
+        for index in range(length):
+            print(colored.yellow("-"), end=(
+                '\n' if index+1 == length else ''
+            ))
+
+    @property
+    def properties(self):
+        return {
+            "type" :  self.file_type,
+            "extension" : self.file_extension
+        }
+
+    @property
+    def file_extension(self):
+        split_path = self.basename.split(".")
+        return split_path
+
+    @property
+    def basename(self):
+        return os.path.basename(self.path)
+
+    @property
+    def file_type(self):
+        return "DIR" if os.path.isdir(self.path) else "FILE" 
 
 def main():
     arguments = sys.argv[1:]
     argument_parser = ArgumentParser(arguments)
     results = argument_parser.create_argument_parser()
     if results.command not in COMMANDS:
-        error = CommandLineException(f"Invalid command : {results.command}")
+        try:
+            Properties(results.command)
+        except AssertionError as exception:
+            EventLogger.error(exception.__str__())
+            sys.exit()
     command_executor(results)
 
 

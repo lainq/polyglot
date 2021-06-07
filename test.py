@@ -1,4 +1,4 @@
-from polyglot.ext.dir import directory
+from polyglot.core.polyglot import Polyglot
 
-data = directory(".", display=True)
-# print(data)
+data=Polyglot("E:\polyglot-1").show()
+print(data)
