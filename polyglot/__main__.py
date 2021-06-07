@@ -17,7 +17,7 @@ DESCRIPTIONS = [
     "--dir=<dir>",
     "--dir=<dir>",
     "--dir=<dir>",
-    ""
+    "",
 ]
 
 
@@ -90,10 +90,7 @@ class HelpMessage(object):
         self.create_help_string()
 
     def create_help_string(self):
-        statements = [
-            "usage: polyglot <command> <param>=<value>",
-            ""
-        ]
+        statements = ["usage: polyglot <command> <param>=<value>", ""]
 
         for index, command in enumerate(self.commands):
             statements.append(
@@ -102,10 +99,11 @@ class HelpMessage(object):
         print("\n".join(statements))
 
     def spaces(self, command, commands):
-        largest = max([len(commands[current_index]) for current_index in range(len(commands))])
-        return "".join([
-            " " for index in range(largest - len(command))
-        ])
+        largest = max(
+            [len(commands[current_index]) for current_index in range(len(commands))]
+        )
+        return "".join([" " for index in range(largest - len(command))])
+
 
 class LanguageStats(object):
     def __init__(self, parameters):
@@ -241,6 +239,7 @@ def command_executor(results):
     elif command == "help":
         help = HelpMessage(COMMANDS, DESCRIPTIONS)
 
+
 class Properties(object):
     def __init__(self, path):
         assert os.path.exists(path), f"{path} does not exist"
@@ -256,36 +255,40 @@ class Properties(object):
         return path
 
     def properties_command(self):
-        print(colored.green(os.path.basename(self.path), bold=True), colored.yellow(f"[{self.file_type}]"))
+        print(
+            colored.green(os.path.basename(self.path), bold=True),
+            colored.yellow(f"[{self.file_type}]"),
+        )
         self.draw_seperator()
 
         properties = self.properties
         for property in properties:
-            print(colored.cyan(f"{property} -> "), colored.yellow(properties.get(property)))
+            print(
+                colored.cyan(f"{property} -> "),
+                colored.yellow(properties.get(property)),
+            )
 
     def draw_seperator(self):
         length = len(self.basename) + (len(self.file_type) + 3)
         for index in range(length):
-            print(colored.yellow("-"), end=(
-                '\n' if index+1 == length else ''
-            ))
+            print(colored.yellow("-"), end=("\n" if index + 1 == length else ""))
 
     @property
     def properties(self):
         return {
-            "type" :  self.file_type,
-            "extension" : self.file_extension,
-            "parent" : self.find_file_path(pathlib.Path(self.path).parent.__str__()),
-            "size" : os.stat(self.path).st_size 
+            "type": self.file_type,
+            "extension": self.file_extension,
+            "parent": self.find_file_path(pathlib.Path(self.path).parent.__str__()),
+            "size": os.stat(self.path).st_size,
         }
 
     @property
     def file_extension(self):
         if os.path.isdir(self.path):
-            return ''
+            return ""
         split_path = self.basename.split(".")
         if len(split_path[0]) == 0 or split_path[0] == self.basename:
-            return ''
+            return ""
         return split_path[-1]
 
     @property
@@ -294,7 +297,8 @@ class Properties(object):
 
     @property
     def file_type(self):
-        return "DIR" if os.path.isdir(self.path) else "FILE" 
+        return "DIR" if os.path.isdir(self.path) else "FILE"
+
 
 def main():
     arguments = sys.argv[1:]

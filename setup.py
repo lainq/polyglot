@@ -24,8 +24,10 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-     entry_points={"console_scripts": [
-        'polyglot = polyglot.__main__.py:main', 
-    ]},
+    entry_points={
+        "console_scripts": [
+            "polyglot = polyglot.__main__.py:main",
+        ]
+    },
     python_requires=">=3.6",
 )
