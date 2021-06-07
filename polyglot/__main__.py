@@ -10,7 +10,15 @@ from polyglot.core.project import Project, ProjectFiles
 from polyglot.core.tree import Tree
 from polyglot.ext.dir import ls
 
-COMMANDS = ["stats", "project", "tree", "dir", "ls"]
+COMMANDS = ["stats", "project", "tree", "dir", "ls", "help"]
+DESCRIPTIONS = [
+    "--dir=<dir> --ignore=<ignore> --detect=<file> --fmt=<fmt> --output=<filename>",
+    "--manifest=<filename>",
+    "--dir=<dir>",
+    "--dir=<dir>",
+    "--dir=<dir>",
+    ""
+]
 
 
 class EventLogger(object):
@@ -72,9 +80,32 @@ class ArgumentParser(object):
             parameters.setdefault(parameter_key, value)
         return self._ArgumentParserResults(command, parameters)
 
-    def create_help_command(self):
-        print("Help")
 
+class HelpMessage(object):
+    def __init__(self, commands, descriptions):
+        assert isinstance(commands, list)
+        self.commands = commands
+        self.descriptions = descriptions
+
+        self.create_help_string()
+
+    def create_help_string(self):
+        statements = [
+            "usage: polyglot <command> <param>=<value>",
+            ""
+        ]
+
+        for index, command in enumerate(self.commands):
+            statements.append(
+                f"{command}{self.spaces(command, COMMANDS)} -> {self.descriptions[index]}"
+            )
+        print("\n".join(statements))
+
+    def spaces(self, command, commands):
+        largest = max([len(commands[current_index]) for current_index in range(len(commands))])
+        return "".join([
+            " " for index in range(largest - len(command))
+        ])
 
 class LanguageStats(object):
     def __init__(self, parameters):
@@ -207,6 +238,8 @@ def command_executor(results):
         ls(command_directory)
     elif command == "ls":
         dirs = ListDirectories(command_directory, params.get("--only-dirs"))
+    elif command == "help":
+        help = HelpMessage(COMMANDS, DESCRIPTIONS)
 
 class Properties(object):
     def __init__(self, path):
