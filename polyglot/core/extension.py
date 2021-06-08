@@ -60,7 +60,6 @@ class Extensions(object):
 
     def __find_language_name(self, filename, content):
         extension = f".{filename.split('.')[-1]}"
-        print(filename)
         for language_key in content:
             if "extensions" not in content[language_key]:
                 continue
