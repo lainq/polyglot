@@ -304,6 +304,12 @@ def main():
     arguments = sys.argv[1:]
     argument_parser = ArgumentParser(arguments)
     results = argument_parser.create_argument_parser()
+    if not results.command:
+        return 1
+
+    if results.command.strip().__len__() == 0:
+        return 1
+
     if results.command not in COMMANDS:
         try:
             Properties(results.command)
@@ -314,4 +320,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    exit_status = main()
+    if exit_status == 1:
+        HelpMessage(COMMANDS, DESCRIPTIONS)
