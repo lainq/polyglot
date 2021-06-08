@@ -8,7 +8,7 @@ DEPENDENCIES = ["requests", "pyyaml", "prettytable", "clint", "toml"]
 
 setuptools.setup(
     name="python-polyglot",  # Replace with your own username
-    version="4.2.7",
+    version="4.2.8",
     author="P Pranav Baburaj",
     author_email="code-roller@googlegroups.com",
     description="Find the percentage of programming languages used in your project",
