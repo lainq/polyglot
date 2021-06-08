@@ -60,13 +60,14 @@ class Extensions(object):
 
     def __find_language_name(self, filename, content):
         extension = f".{filename.split('.')[-1]}"
+        print(filename)
         for language_key in content:
             if "extensions" not in content[language_key]:
                 continue
 
             if extension in content[language_key]["extensions"]:
                 return language_key
-
+        
         return "Unknown file"
 
     def remove_unwanted_keys(self, file_content):
