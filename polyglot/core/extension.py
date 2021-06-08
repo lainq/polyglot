@@ -17,6 +17,7 @@ def validate_argument_types(values, types, message):
 def install_files(read_url, write_file_dir, filename, extension):
     assert isinstance(read_url, str), "Read url expected to be a string"
     assert isinstance(write_file_dir, str), "Write path expected to be a string"
+    print("LOOOLL")
 
     filename = os.path.join(write_file_dir, f"{filename}.{extension}")
     try:
@@ -66,7 +67,7 @@ class Extensions(object):
 
             if extension in content[language_key]["extensions"]:
                 return language_key
-        
+
         return "Unknown file"
 
     def remove_unwanted_keys(self, file_content):

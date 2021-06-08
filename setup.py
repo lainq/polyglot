@@ -26,8 +26,8 @@ setuptools.setup(
     ],
     entry_points={
         "console_scripts": [
-            "pgt = polyglot.__main__:main",
-            "polyglot = polyglot.__main__:main",
+            "pgt = cli:main",
+            "polyglot = cli:main",
         ]
     },
     python_requires=">=3.6",

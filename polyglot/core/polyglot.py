@@ -31,7 +31,6 @@ class Polyglot(object):
         self.ignore = ignore
         self.directory = Polyglot.find_directory_path(directory_name)
         self.files = self.find_directory_files(self.directory)
-
         if self.ignore:
             self.files = Ignore.remove_specific_list_element(
                 self.files,

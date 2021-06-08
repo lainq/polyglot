@@ -2,6 +2,7 @@ import sys
 import os
 import json
 import pathlib
+import pip
 
 from clint.textui import colored
 
@@ -10,7 +11,7 @@ from polyglot.core.project import Project, ProjectFiles
 from polyglot.core.tree import Tree
 from polyglot.ext.dir import ls
 
-COMMANDS = ["stats", "project", "tree", "dir", "ls", "help"]
+COMMANDS = ["stats", "project", "tree", "dir", "ls", "help", "up"]
 DESCRIPTIONS = [
     "--dir=<dir> --ignore=<ignore> --detect=<file> --fmt=<fmt> --output=<filename>",
     "--manifest=<filename>",
@@ -238,6 +239,8 @@ def command_executor(results):
         dirs = ListDirectories(command_directory, params.get("--only-dirs"))
     elif command == "help":
         help = HelpMessage(COMMANDS, DESCRIPTIONS)
+    elif command == "up":
+        pip.main(["install", "python-polyglot", "--upgrade"])
 
 
 class Properties(object):
