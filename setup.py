@@ -26,6 +26,7 @@ setuptools.setup(
     ],
     entry_points={
         "console_scripts": [
+            "pgt = polyglot.__main__:main",
             "polyglot = polyglot.__main__:main",
         ]
     },
