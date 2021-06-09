@@ -1,7 +1,7 @@
 # CLI
 The polyglot module comes along with a command line application. The cli can be accessed using `polyglot` or `pgt`
 
-## Stats
+## `Stats`
 ```ps1
 polyglot stats
 ```
@@ -18,7 +18,7 @@ polyglot stats
 polyglot stats --dir=/home/Documents --ignore --fmt=l --output=output.toml
 ```
 
-## Tree
+## `Tree`
 ```ps1
 polyglot tree
 ```
@@ -26,4 +26,16 @@ polyglot tree
 #### Parameters
 - `--dir`: The directory. Set to the current directory by default.
 
-    
+## `dir` or `ls`
+```ps1
+polyglot ls
+polyglot dir
+```
+
+## `up`
+Update your cli
+```
+polyglot up
+```
+
+
