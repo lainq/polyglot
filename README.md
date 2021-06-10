@@ -29,8 +29,6 @@
 
 </p>
 
-<!-- ABOUT THE PROJECT -->
-> NOTICE: The application is being developed and contains a lot of bugs.
 
 ## 🙉 About The Project
 
