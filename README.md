@@ -8,7 +8,7 @@
   <p align="center">
     Find the percentage of programming languages used in your project
     <br />
-    <a href="https://python-polyglot.netlify.app/">📖 Documentation</a>
+    <a href="https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md">📖 Documentation</a>
     ·
     <a href="https://github.com/pranavbaburaj/polyglot/issues">Report a Bug</a>
     ·
