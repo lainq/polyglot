@@ -77,6 +77,8 @@ polyglot = Polyglot(dirname)
 polyglot.show(display=True)
 ```
 
+Read the complete polyglot documentation [here](https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md)
+
 <br>
 <img src="https://github.com/pranavbaburaj/polyglot/blob/main/docs/polyglot-result.png?raw=true" height="450">
 
