@@ -8,7 +8,7 @@
   <p align="center">
     Find the percentage of programming languages used in your project
     <br />
-    <a href="https://python-polyglot.netlify.app/">📖 Documentation</a>
+    <a href="https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md">📖 Documentation</a>
     ·
     <a href="https://github.com/pranavbaburaj/polyglot/issues">Report a Bug</a>
     ·
@@ -29,8 +29,6 @@
 
 </p>
 
-<!-- ABOUT THE PROJECT -->
-> NOTICE: The application is being developed and contains a lot of bugs.
 
 ## 🙉 About The Project
 
@@ -78,6 +76,8 @@ dirname = "path/to/directory"
 polyglot = Polyglot(dirname)
 polyglot.show(display=True)
 ```
+
+Read the complete polyglot documentation [here](https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md)
 
 <br>
 <img src="https://github.com/pranavbaburaj/polyglot/blob/main/docs/polyglot-result.png?raw=true" height="450">
