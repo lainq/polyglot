@@ -45,7 +45,7 @@ class CommandLineException(object):
         self.create_exception()
 
     def create_exception(self):
-        """Create an exception and exit the program if 
+        """Create an exception and exit the program if
         the exception is fatal
         """
         print(colored.red(f"ERROR:{self.message}"))
