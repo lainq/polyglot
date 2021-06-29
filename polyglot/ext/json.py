@@ -53,6 +53,19 @@ class JsonStore(object):
 		self.__store[key] = data
 		self.commit()
 
+	@property
+	def __expected_parameter_type():
+		if self.typeof_data == "any":
+			return "any"
+
+		return typeof_data.__name__
+
+	def filter_by_value(self, value):
+		values = list(self.__store.values())
+		keys = self.keys
+		matches = [keys[index] if val == value else None for index, val in enumerate(values)]
+		return list(filter(lambda element:element is not None, matches))
+
 	def get(self, key=None):
 		if key:
 			return self.__store[key]

@@ -4,8 +4,7 @@ def test_fucntion():
 	pass
 
 store = JsonStore(__file__, "testing_json_storage")
-print(store.keys)
 
-store.add(9)
+store.add(95)
 
-print(store.get())
+print(store.filter_by_value(95))
