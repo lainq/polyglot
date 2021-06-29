@@ -13,7 +13,7 @@ from polyglot.core import Polyglot
 Initialize a polyglot instance
 
 ```python
-polyglot = Polyglot("path/to/directory", ignore=["language.yml"])
+polyglot = Polyglot("path/to/directory", ignore="example.polyglot")
 ```
 
 Polyglot takes in to parameters, the path to the directory and the ingore file
