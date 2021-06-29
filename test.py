@@ -1,4 +1,2 @@
-from polyglot.core.polyglot import Polyglot
-
-data = Polyglot("E:\polyglot-1").show(fmt="l")
-print(data)
+from polyglot.ext.json import JsonStore
+store = JsonStore(__file__, "testing_json_storage")

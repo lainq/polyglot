@@ -45,6 +45,9 @@ class CommandLineException(object):
         self.create_exception()
 
     def create_exception(self):
+        """Create an exception and exit the program if 
+        the exception is fatal
+        """
         print(colored.red(f"ERROR:{self.message}"))
         if self.suggestion:
             print(colored.yellow(self.suggestion.strip()))
@@ -62,6 +65,14 @@ class ArgumentParser(object):
         self.arguments = arguments
 
     def create_argument_parser(self):
+        """
+        Parse the arguments into different commands
+        and parameters. The first element in the
+        argv list is considered to be the command.
+
+        All the following elements should start with --
+        and are considered as parameters
+        """
         command, parameters = None, {}
         for index, current in enumerate(self.arguments):
             if index == 0:
