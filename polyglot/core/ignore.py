@@ -87,6 +87,7 @@ class Ignore(object):
             if filename.endswith(extension):
                 self.ignore_files.append(filename)
 
+    @staticmethod
     def __find_all_files(ignore_files, ignore_extensions, files):
         for filename_index in range(len(files)):
             current_filename = files[filename_index]

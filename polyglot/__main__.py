@@ -19,6 +19,7 @@ DESCRIPTIONS = [
     "--dir=<dir>",
     "--dir=<dir>",
     "",
+    "",
 ]
 
 
@@ -316,6 +317,8 @@ class Properties(object):
 
 def main():
     arguments = sys.argv[1:]
+    if len(arguments) == 0:
+        return 1
     argument_parser = ArgumentParser(arguments)
     results = argument_parser.create_argument_parser()
     if not results.command:

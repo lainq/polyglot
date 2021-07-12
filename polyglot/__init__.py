@@ -24,3 +24,5 @@ SOFTWARE.
 """
 
 from .core import Polyglot
+
+__version__ = "4.2.9"
