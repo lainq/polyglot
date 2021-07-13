@@ -7,6 +7,7 @@ def test_fucntion():
 
 store = JsonStore(__file__, "testing_json_storage")
 
-store.add(95)
+print(store.get("b88fb"))
 
-print(store.filter_by_value(95))
+
+# store.add("lolmo")

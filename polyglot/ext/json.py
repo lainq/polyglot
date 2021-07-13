@@ -3,6 +3,22 @@ import os
 import uuid
 
 
+def __get_ascii_value(character):
+    try:
+        return ord(character)
+    except Exception as exception:
+        return -1
+
+
+def _convert_string_to_ascii_strings(string):
+    assert isinstance(string, str)
+    final_string = ""
+    for character in str(string):
+        final_string += str(__get_ascii_value(character))
+        final_string += "."
+    return final_string
+
+
 class JsonStore(object):
     def __init__(self, filename, database_name, typeof_data="any"):
         self.file = filename
@@ -51,7 +67,9 @@ class JsonStore(object):
         if not self.__validate_data_type(data):
             raise TypeError(f"Parameter")
         key = self.__create_short_uuid(check_for_duplicate=self.keys)
-        self.__store[key] = data
+        self.__store[key] = (
+            _convert_string_to_ascii_strings(data) if isinstance(data, str) else data
+        )
         self.commit()
 
     @property
@@ -70,11 +88,20 @@ class JsonStore(object):
         return list(filter(lambda element: element is not None, matches))
 
     def get(self, key=None):
-        if key:
-            return self.__store[key]
-        if len(self.keys) == 0:
+        if len(self.keys) == 0 and key == None:
             return None
-        return self.__store[self.keys[0]]
+        return_value = self.__store[key or self.keys[0]]
+        if not isinstance(return_value, str):
+            return return_value
+        final_string = ""
+        for character in return_value.split("."):
+            stripped = character.strip()
+            if len(stripped) == 0:
+                continue
+            if int(character) == -1:
+                continue
+            final_string += chr(int(character))
+        return final_string
 
     def commit(self):
         with open(self.__path, "w") as file_writer:
