@@ -2,29 +2,38 @@ import json
 import os
 import uuid
 
+class UseAscii(object):
+    @staticmethod
+    def string_to_ascii_string(string, separator="."):
+        assert "__str__" in dir(string)
+        string_form, return_value = str(string), ""
+        for current_character in string_form:
+            return_value += str(UseAscii.get_ascii_value(current_character)) + separator
+        return return_value
 
-def __get_ascii_value(character):
-    try:
-        return ord(character)
-    except Exception as exception:
-        return -1
+    @staticmethod
+    def get_ascii_value(character):
+        try:
+            return ord(character)
+        except Exception as exception:
+            return -1
 
-
-def _convert_string_to_ascii_strings(string):
-    assert isinstance(string, str)
-    final_string = ""
-    for character in str(string):
-        final_string += str(__get_ascii_value(character))
-        final_string += "."
-    return final_string
-
+    @staticmethod
+    def ascii_string_to_string(ascii_string, separator="."):
+        return_value = ""
+        for character in list(filter(lambda element: element.strip(),ascii_string.split(separator))):
+            if len(character) == 0:continue
+            value = int(character)
+            if value == -1:continue
+            return_value += chr(value)
+        return return_value
 
 class JsonStore(object):
     def __init__(self, filename, database_name, typeof_data="any"):
         self.file = filename
         self.name = database_name.strip()
         self.__path = os.path.join(os.path.dirname(self.file), f"{self.name}.json")
-
+ 
         assert len(self.name) > 0, "Name should have atleast one character"
         if not (type(typeof_data).__name__ == "type" or typeof_data == "any"):
             raise TypeError(f"Invalid type : {type(typeof_data).__name__}")
@@ -68,16 +77,16 @@ class JsonStore(object):
             raise TypeError(f"Parameter")
         key = self.__create_short_uuid(check_for_duplicate=self.keys)
         self.__store[key] = (
-            _convert_string_to_ascii_strings(data) if isinstance(data, str) else data
+            UseAscii.string_to_ascii_string(data) if isinstance(data, str) else data
         )
         self.commit()
 
     @property
-    def __expected_parameter_type():
+    def __expected_parameter_type(self):
         if self.typeof_data == "any":
             return "any"
 
-        return typeof_data.__name__
+        return self.typeof_data.__name__
 
     def filter_by_value(self, value):
         values = list(self.__store.values())
@@ -93,15 +102,7 @@ class JsonStore(object):
         return_value = self.__store[key or self.keys[0]]
         if not isinstance(return_value, str):
             return return_value
-        final_string = ""
-        for character in return_value.split("."):
-            stripped = character.strip()
-            if len(stripped) == 0:
-                continue
-            if int(character) == -1:
-                continue
-            final_string += chr(int(character))
-        return final_string
+        return UseAscii.ascii_string_to_string(return_value)
 
     def commit(self):
         with open(self.__path, "w") as file_writer:
