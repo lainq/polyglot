@@ -1,1 +1,3 @@
-from polyglot.tree import Tree
+from polyglot.core import Polyglot
+
+poly = Polyglot("E://clones//v//").show()

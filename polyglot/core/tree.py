@@ -48,21 +48,26 @@ class Tree(object):
             pointers = [self.tree] * (len(contents) - 1) + [self.last]
             for pointer, path in zip(pointers, contents):
                 root = os.path.abspath(os.path.dirname(path.absolute()))
-                if path.is_dir():
-                    if ".git" in str(path.absolute()):
-                        continue
-                    yield prefix + pointer + path.name
-                    extension = self.branch if pointer == self.tree else self.space
-                    yield from inner(path, prefix=prefix + extension, level=level - 1)
-                elif not limit_to_directories:
-                    yield prefix + pointer + path.name
-
-        iterator = inner(path, level=level)
-        for line in itertools.islice(iterator, length_limit):
-            print(clint.textui.colored.cyan(line))
-        if next(iterator, None):
-            print(
+                try:
+                    if path.is_dir():
+                        if ".git" in str(path.absolute()):
+                            continue
+                        yield prefix + pointer + path.name
+                        extension = self.branch if pointer == self.tree else self.space
+                        yield from inner(path, prefix=prefix + extension, level=level - 1)
+                    elif not limit_to_directories:
+                        yield prefix + pointer + path.name
+                except PermissionError:
+                    continue
+        try:
+            iterator = inner(path, level=level)
+            for line in itertools.islice(iterator, length_limit):
+                print(clint.textui.colored.cyan(line))
+            if next(iterator, None):
+                print(
                 clint.textui.colored.red(
                     f"... length_limit, {length_limit}, reached, counted:"
                 )
             )
+        except KeyboardInterrupt:
+            return None
