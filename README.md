@@ -123,14 +123,4 @@ Contributions are what make the open source community such an amazing place to l
 4. Push to the Branch (`git push origin feature`)
 5. Open a Pull Request
 
-<!-- LICENSE -->
 
-## 📰 License
-
-Distributed under the MIT license. See [`LICENSE`](https://github.com/pranavbaburaj/polyglot/blob/main/LICENSE) for more information.
-
-<!-- CONTACT -->
-
-## 📞 Contact
-
-Pranav Baburaj - pranavbaburaj@zohomail.com
