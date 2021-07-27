@@ -25,12 +25,13 @@
     <img src="https://api.codacy.com/project/badge/Grade/601da323f4ea482f9c2ee7f4164e8ee9">
   </p>
 
+
   <br />
 
 </p>
 
 
-## 🙉 About The Project
+## About The Project
 
 Find the percentage of programming languages used in your project
 
@@ -38,17 +39,8 @@ Find the percentage of programming languages used in your project
 
 ## ⚡ Getting Started
 
-In order to get started, please install `pip`.
+In order to get started, please make sure that you have [`python`](https://python.org) and `pip` installed on your computer.
 
-### 📝 Prerequisites
-
-- pip
-
-```sh
-sudo apt-get install python3-pip
-```
-
-> Learn more about pip [here](https://pip.pypa.io/en/stable/installing/)
 
 ### ⬇️ Installation
 
@@ -58,6 +50,8 @@ sudo apt-get install python3-pip
 # install the python-polyglot package using pip
 
 pip3 install python-polyglot
+# or
+pip install python-polyglot
 ```
 
 ## 🎉 Usage
@@ -81,6 +75,8 @@ Read the complete polyglot documentation [here](https://github.com/pranavbaburaj
 
 <br>
 <img src="https://github.com/pranavbaburaj/polyglot/blob/main/docs/polyglot-result.png?raw=true" height="450">
+
+> Read more about the documentation [here](https://github.com/pranavbaburaj/polyglot/blob/main/docs/README.md)
 
 <!--
 ```

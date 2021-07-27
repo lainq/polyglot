@@ -101,12 +101,13 @@ class EnvParser(object):
         self.character = self.position.current_character(self.source)
 
 
-class Env(object):
-    defualt_filename = os.path.join(os.getcwd(), ".env")
 
-    def __init__(self, env=None, load=True):
+class Env(object):
+    default_filename = os.path.join(os.getcwd(), ".env")
+
+    def __init__(self, env=None, load=True, file=None):
         assert isinstance(env, str) or env == None, "Unexpected type of parameter env"
-        self.env = env or self.defualt_filename
+        self.env = env or os.path.join(os.path.dirname(file), ".env") or self.defualt_filename
         self.load_to_process = load
 
     def load(self):
